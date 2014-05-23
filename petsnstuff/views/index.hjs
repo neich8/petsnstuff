@@ -7,5 +7,17 @@
   <body>
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
+    <h5>Create Account</h5>
+    <form action="/newuser" method='post'>
+    	<input type="string" name="username" placeholder="Username"/>
+    	<input type="email" name="email" placeholder="Email"/>
+    	<input type="submit" placeholder="Create"/>
+    <form>
+    <h5>Sigin</h5>
+    <form action="/signin" method='post'>
+    	<input type="string" name="username" placeholder="Username"/>
+    	<input type="email" name="email" placeholder="Email"/>
+    	<input type="submit" placeholder="Signin"/>
+    <form>
   </body>
 </html>

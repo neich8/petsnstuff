@@ -48,25 +48,7 @@ app.get("/profile/:id", function(req, res) {
 	});
 })
 
+app.post("/edit/:id")
+
 }
 
-
-	// var db = req.db;
-
-	// var userName =  req.body.username;
-	// var email = req.body.email;
-
-	// var collection = db.get('petsnstuff')
-
-	// collection.insert({
-	// 	"username" :userName,
-	// 	"email" : email
-	// }, function(err, doc) {
-	// 	if(err) {
-	// 		res.send("We didnt save your info")
-	// 	}
-	// 	else {
-	// 		// res.location("profile");
-	// 		
-	// 	}
-	// });

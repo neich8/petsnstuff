@@ -7,7 +7,7 @@ This As of right now 5/22/14 Is a non working very basic skeleton written in nod
 
 
 
-[http://passportjs.org/](passport)
-[http://embeddedjs.com/][EJS]
-[http://mongoosejs.com/docs/api.html#model_Model.findById][mongoose]
+[http://passportjs.org/](http://passportjs.org/)
+[http://embeddedjs.com/]
+[http://mongoosejs.com/docs/api.html#model_Model.findById]
 

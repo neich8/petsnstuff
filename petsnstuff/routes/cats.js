@@ -27,7 +27,7 @@ app.post("/newuser", function(req, res) {
 });
 
 app.post("/signin", function(req, res) {
-
+console.log("signin")
 
 
 })

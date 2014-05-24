@@ -65,10 +65,15 @@ module.exports = function(app) {
 			title: req.body.title,
 			post: req.body.post
 		}
-		Post.findById(id, function(err, post) {
-			post.update(newPost)
-			SavePost(post, res)
-		})
+		Post.findOneAndUpdate({_id: id}, newPost,function(err, post){
+			if (err) {
+				console.log("Shits broke")
+			}
+			else {
+				console.log("Updated")
+				res.redirect("/messageboard")
+			}
+		});
 	});
 }
 

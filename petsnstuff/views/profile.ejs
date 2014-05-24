@@ -5,11 +5,16 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-  	<h1>Hey your here!</h1>
-  	<ul>
+  	<h1>Hey <%= profile.userName%> your here!</h1>
+    <h3>Add your Pet!<h3>
+      <form action="/create" method="post">
+        <input type="string" name="name" placeholder="name">
+        <input type="integer"name="age" placeholder="age">
+        <input type="string" name="shots" placeholder="shots">
+        <input type="string" name= "weight" placeholder="weight">
+        <input type="integer"name= "type" placeholder="type">
+        <input type="string" name= "photo" placeholder="photo">
+        <button type="submit">Add!</button>
 
-  		<li><%= profile.userName%></li>
-
-  	</ul>
   </body>
   </html>

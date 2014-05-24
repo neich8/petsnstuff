@@ -44,6 +44,9 @@ app.use('/users', users);
 
 require("./routes/cats")(app);
 require("./routes/messageboard")(app);
+require("./routes/pets")(app);
+
+
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

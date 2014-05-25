@@ -30,20 +30,17 @@ app.post("/newuser", function(req, res) {
 		user.save(function (err, user) {
 	  if (err) {
 	 	  console.log('meow');
-		} 
+		}
 		else {
 			console.log(user)
 			res.redirect("profile/" + user._id);
 		}
 	});
-
 });
 
 app.post("/signin", function(req, res) {
-console.log("signin")
-
-
-})
+	console.log("signin")
+});
 
 app.get("/profile/:id", function(req, res) {
 		var id = req.params.id
@@ -51,7 +48,7 @@ app.get("/profile/:id", function(req, res) {
 		User.findById(id, function(err,user) {
 				  if (err) {
 	 	  console.log('meow');
-		} 
+		}
 		else {
 			console.log(user)
 			res.render('profile', {
@@ -64,4 +61,3 @@ app.get("/profile/:id", function(req, res) {
 app.post("/edit/:id")
 
 }
-

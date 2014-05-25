@@ -13,10 +13,7 @@ module.exports = function(app) {
 				})
 			}
 		})
-
 	});
-
-
 
 	app.post("/delete/:id", function(req, res){
 		console.log("in the delete method")
@@ -36,7 +33,7 @@ module.exports = function(app) {
 				 		console.log("Deleted")
 				 		res.redirect("/messageboard")
 				 	}
-				}); 	
+				});
 			}
 		});
 	});

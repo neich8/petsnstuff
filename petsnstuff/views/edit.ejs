@@ -5,10 +5,37 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-  	<form action="/edit/<%= edit.id %>" method="post">
-  		<input type="string" name="title"  value="<%= edit.title%>">
-  		<textarea rows="10" cols="30" name="post"><%= edit.post%></textarea>
-  		<button type="submit">Edit Add if statement!!!!!!!</button>
-    </form>
+    <div id="nav">
+      <div id="nav-wrapper">
+        <ul>
+          <li><a href="#">Home</a></li>
+            <li><a href="#">Dog Food</a></li>
+            <li><a href="#">Nick's Cat</a></li>
+            <li><a href="#">MoleMan</a></li>
+            <li><a href="#">Logout</a></li>
+
+               <div id="bulldog">
+                 <img src="/imgages/img_1568.jpg" width="42" height="42">
+               </div>
+        </ul>
+        
+       
+      </div>
+    </div>
+
+    <div id="wrapper">
+      <div id="content">
+         
+
+      	<form action="/edit/<%= edit.id %>" method="post">
+           Title: <br>
+      		<input type="string" name="title"  value="<%= edit.title%>"><br><br>
+          Message: <br>
+      		<textarea rows="10" cols="30" name="post"><%= edit.post%></textarea>
+          <br><br>
+      		<button type="submit">Edit Add if statement!!!!!!!</button>
+        </form>
+      </div>
+    </div>
    </body>
 </html>

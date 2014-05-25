@@ -2,13 +2,34 @@
 <html>
   <head>
     <title>Message Bored</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
   </head>
-  <body>
+  
+<body>
+    <div id="nav">
+    <div id="nav-wrapper">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Dog Food</a></li>
+            <li><a href="#">Nick's Cat</a></li>
+            <li><a href="#">MoleMan</a></li>
+            <li><a href="#">Logout</a></li>
+
+               <div id="bulldog">
+                 <img src="/imgages/img_1568.jpg" width="42" height="42">
+               </div>
+        </ul>
+    </div>
+</div>
+  
+  <div id="wrapper">
+    <div id="content">
   	<form action="/post" method="post">
-  		<input type="string" name="title"  placeholder="Title">
+      Title:
+  		<br><input type="string" name="title"  placeholder="Title"> <br><br>
+      Message:<br>
   		<textarea rows="10" cols="30" name="content"></textarea>
-  		<input type="submit" name="Post!">
+  		<br><br><input type="submit" name="Post!">
       <h1>Posts</h1>
 
       <ul>
@@ -19,8 +40,12 @@
           <li><form action="/delete/<%= messageboard[i]._id %>" method="post">
             <button type="submit">Delete</button>
             </form></li>
+          
             <li><a href="/edit/<%= messageboard[i]._id %>">Edit DONT FORGET THE IF STATEMENT!!!!</a></li>
         <% } %>
       </ul>
+    </div>
+  </div>
   </body>
+
 </html>

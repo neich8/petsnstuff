@@ -1,16 +1,19 @@
-var User = require("../models/user");
+var User = require("../models/user")["User"];;
 var Nutrition = require("../models/nutrion");
 var Ingredient = require("../models/ingredient")
+
 var passport = require('passport')
 module.exports = function(app){
 
 
 app.get('/', function(req, res) {
+
 	Nutrition.find({ Brand: "Alpo Dog Food (Dry)"}).select('-_id').exec(function(err, food) {
 		Ingredient.find({}, function(err, ingredients) {
 			res.render('index', { title: "Pets 'n Stuff", foods: food, ingredients: ingredients} );
 		});
 	});
+
 });
 
 app.post('/brands/:brand_name', function(req, res) {

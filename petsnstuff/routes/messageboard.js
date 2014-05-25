@@ -66,7 +66,7 @@ module.exports = function(app) {
 			title: req.body.title,
 			post: req.body.post
 		}
-		Post.findOneAndUpdate({_id: id}, newPost,function(err, post){
+		Post.findOneAndUpdate({_id: id}, fdnewPost,function(err, post){
 			if (err) {
 				console.log("Shits broke")
 			}

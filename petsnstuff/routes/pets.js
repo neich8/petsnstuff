@@ -1,10 +1,11 @@
-var User = require("../models/user")
+var User = require("../models/user")["User"];
+var Pet = require("../models/user")["Pet"];
 module.exports = function(app) {
 
 app.post('/create/:id', function(req, res) {
 	var id = req.params.id
 
-			var newPet = {
+			var pet = {
 			name: req.body.name,
 			age: req.body.age,
 			shots: req.body.shots,
@@ -12,26 +13,20 @@ app.post('/create/:id', function(req, res) {
 			type: req.body.type,
 			photo: req.body.photo
 		}
-		console.log(newPet)
-			user = User.find({_id: id}, function(err, user) {
+
+		// console.log(pet)
+			User.find({_id: id}, function(err, users) {
 				if(err) {
 					console.log("Shits broke yo")
 				}
 				else {
-					console.log(user)
-					var update = user.pet.push(newPet)
-					console.log("\n\n\n\n\n\n\n\n\n")
-					console.log(user.pet)
+
+					console.log(users[0])
+					user = users[0]
+					user.pets.push(pet)
+					user.save(function(err, user) {})
+					res.redirect("/profile/" + id)
 				}
 			})
-			
-
-
-
-});
-
-
-
-
-
+	});
 }

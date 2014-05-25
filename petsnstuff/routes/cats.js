@@ -1,10 +1,10 @@
-var User = require("../models/user");
+var User = require("../models/user")["User"];
 var passport = require('passport')
 module.exports = function(app){
 
 
 app.get('/', function(req, res) {
-	
+	console.log(User)
   res.render('index', { title: "Pets 'n Stuff" });
 });
 

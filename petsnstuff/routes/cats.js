@@ -1,4 +1,6 @@
 var User = require("../models/user");
+var Nutrition = require("../models/nutrion");
+var Ingredient = require("../models/ingredient")
 var passport = require('passport')
 module.exports = function(app){
 

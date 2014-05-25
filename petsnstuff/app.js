@@ -3,8 +3,15 @@ var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var expressSession = require('express-session');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+
+
+
+
+
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -12,6 +19,7 @@ var messageBoard = require('./routes/messageboard')
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/petsnstuff');
+var User = require("./models/user");
 
 
 
@@ -32,6 +40,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(methodOverride());
 app.use(cookieParser());
+
+app.use(expressSession({secret:'somesecrettokenhere'}));
+
+
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -77,6 +89,8 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+
 
 
 module.exports = app;

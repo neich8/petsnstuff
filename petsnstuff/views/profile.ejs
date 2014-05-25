@@ -78,6 +78,7 @@
   </head>
 
   <body>
+<<<<<<< HEAD
     <div id="nav">
       <div id="nav-wrapper">
         <ul>
@@ -110,6 +111,18 @@
           </fieldset>
         </form>
       </div>
+=======
+  	<h1>Hey <%= profile.userName%> your here!</h1>
+    <h3>Add your Pet!<h3>
+      <form action="/create/<%= profile._id %>" method="post">
+        <input type="string" name="name" placeholder="name">
+        <input type="integer"name="age" placeholder="age">
+        <input type="string" name="shots" placeholder="shots">
+        <input type="string" name= "weight" placeholder="weight">
+        <input type="integer"name= "type" placeholder="type">
+        <input type="string" name= "photo" placeholder="photo">
+        <button type="submit">Add!</button>
+>>>>>>> 488578a82636dfed86618e9f8b320c1433df88cc
 
       <div id="tabs">
         <ul>

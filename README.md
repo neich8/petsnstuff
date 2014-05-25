@@ -20,7 +20,7 @@ mongoimport --db petsnstuff --type csv --headerline --file ../public/csv/ingredi
 
 then
 
---db petsnstuff --type csv --headerline --file ../public/csv/nutritions.csv
+mongoimport -d petsnstuff -c nutritions  --type csv --file  ../public/csv/nutritions.csv --headerline
 
 to import sample db
 

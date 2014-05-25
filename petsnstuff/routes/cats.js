@@ -1,12 +1,25 @@
+
 var User = require("../models/user");
+var Ingredient = require("../models/ingredient");
+var Nutrition = require("../models/nutrition");
+
 module.exports = function(app){
 
-
-
 app.get('/', function(req, res) {
-  res.render('index', { title: "Pets 'n Stuff" });
+	Nutrition.find({ Brand: "Alpo Dog Food (Dry)"}).select('-_id').exec(function(err, food) {
+		Ingredient.find({}, function(err, ingredients) {
+			res.render('index', { title: "Pets 'n Stuff", foods: food, ingredients: ingredients} );
+		});
+	});
 });
 
+app.post('/brands/:brand_name', function(req, res) {
+	Nutrition.find({ Brand: req.params.brand_name}, function(err, food) {
+		Ingredient.findOne({ Brand: req.params.brand_name}, function(err, ingredient) {
+				res.send({foods: food, ingredient:ingredient});
+		});
+	});
+});
 
 app.post("/newuser", function(req, res) {
 	console.log(req.body)

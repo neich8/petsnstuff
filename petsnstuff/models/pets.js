@@ -13,7 +13,4 @@ var petSchema = new Schema ({
 
 
 
-
-
-
 module.exports = mongoose.model('Pet', petSchema);

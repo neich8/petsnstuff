@@ -122,95 +122,86 @@
   this.Donut3D = Donut3D;
 }();
 
+$(document).ready(function() {
 
-d3.csv("/csv/nutrition_table.csv", function(err, info) {
-  var svg = d3.select("body").append("svg").attr("width",700).attr("height",250);
-    console.log(info)
-  svg.append("g").attr("id","salesDonut");
-  svg.append("g").attr("id","quotesDonut");
+  var foods = $(".foods").html().split(",")
 
   var foodData=[
-    {label:"Protein", color:"#3366CC", value: parseInt(info[1].Protein) },
-    {label:"Fat", color:"#DC3912", value: parseInt(info[1].Fat) },
-    {label:"Carbs", color:"#FF9900", value: 0 },
-    {label:"Other Weight", color:"#ffffff", value: (100 - parseInt(info[1].Protein) - parseInt(info[1].Fat) )}
+    {label:"Protein", color:"#3366CC", value: foods[0] },
+    {label:"Fat", color:"#DC3912", value: foods[1] },
+    {label:"Carbs", color:"#FF9900", value: foods[2] },
+    {label:"Other Weight", color:"#ffffff", value: 100 - foods[0] - foods[1] - foods[2]}
   ];
 
-  Donut3D.draw("salesDonut", updateData(), 150, 100, 130, 100, 20, 0.3);
-  Donut3D.draw("quotesDonut", updateData(), 450, 100, 130, 100, 20, 0.3);
+  Donut3D.draw("leftGraph", updateData(foodData), 150, 100, 130, 100, 20, 0.3);
+  Donut3D.draw("rightGraph", updateData(foodData), 550, 100, 130, 100, 20, 0.3);
 
-  function changeData(){
-    Donut3D.transition("salesDonut", updateData(), 130, 100, 20, 0.3);
-    Donut3D.transition("quotesDonut", updateData(), 130, 100, 20, 0.3);
+  changeData("left", foodData)
+  changeData("right", foodData)
+
+  document.getElementById("guaranteed_analysis").checked = true;
+
+});
+
+function change_brand(side) {
+  var selection = $("#food_menu_" + side + " option:selected").text()
+
+  $.post( '/brands/' + selection, function(response){
+    $("#ingredients_" + side).html(response.ingredient.Ingredients);
+    $("#food0_" + side).text(response.foods[0].Protein + "," + response.foods[0].Fat + "," + response.foods[0].Carbs)
+    $("#food1_" + side).text(response.foods[1].Protein + "," + response.foods[1].Fat + "," + response.foods[1].Carbs)
+    $("#food2_" + side).text(response.foods[2].Protein + "," + response.foods[2].Fat + "," + response.foods[2].Carbs)
+
+    var foodData=[
+      {label:"Protein", color:"#3366CC", value: response.foods[0].Protein },
+      {label:"Fat", color:"#DC3912", value: response.foods[0].Fat },
+      {label:"Carbs", color:"#FF9900", value: response.foods[0].Carbs },
+      {label:"Other Weight", color:"#ffffff", value: 100 - response.foods[0].Protein - response.foods[0].Fat - response.foods[0].Carbs }
+    ];
+
+    if ( $('#guaranteed_analysis').is(':checked') ){
+      change_analysis(0)
+    }
+    if ( $('#dry_matter_basis').is(':checked') ) {
+      change_analysis(1)
+    };
+    if ( $('#calorie_weighted_basis').is(':checked') ) {
+      change_analysis(2)
+    };
+
+  })
+};
+
+function change_analysis(num) {
+
+
+  var left_foods = $($(".left_foods")[num]).html().split(",")
+  var right_foods = $($(".right_foods")[num]).html().split(",")
+
+  var left_foodData=[
+    {label:"Protein", color:"#3366CC", value: left_foods[0] },
+    {label:"Fat", color:"#DC3912", value: left_foods[1] },
+    {label:"Carbs", color:"#FF9900", value: left_foods[2] },
+    {label:"Other Weight", color:"#ffffff", value: 100 - left_foods[0] - left_foods[1] - left_foods[2]}
+  ];
+
+  var right_foodData=[
+    {label:"Protein", color:"#3366CC", value: right_foods[0] },
+    {label:"Fat", color:"#DC3912", value: right_foods[1] },
+    {label:"Carbs", color:"#FF9900", value: right_foods[2] },
+    {label:"Other Weight", color:"#ffffff", value: 100 - right_foods[0] - right_foods[1] - right_foods[2]}
+  ];
+
+  changeData("left", left_foodData)
+  changeData("right", right_foodData)
+}
+
+  function changeData(side, foodData){
+    Donut3D.transition(side + "Graph", updateData(foodData), 130, 100, 20, 0.3);
   }
 
-  function updateData(){
+  function updateData(foodData){
     return foodData.map(function(d){
       return {label:d.label, value:d.value, color:d.color};
     });
   };
-
-  document.getElementById("guaranteed_analysis").checked = true;
-});
-
-d3.csv("/csv/ingredients.csv", function(err, more_info) {
-    $("body").append("<br/><select id='food_menu' onchange='update(0)'></select>")
-    $("body").append("<div id='ingredients'>" + more_info[0].Ingredients + "</div>")
-
-    for (var i = 0; i <= more_info.length; i++) {
-      //console.log(more_info[i].Ingredients)
-      $("#food_menu").append("<option value='" + i + "'>" + more_info[i].Brand + "</option>")
-    }
-});
-
-function update(num) {
-  console.log()
-
-  var radio = document.getElementsByName("method");
-
-  radio[num].checked = true;
-
-  d3.csv("/csv/nutrition_table.csv", function(err, info) {
-    var food_array = []
-    var selection = $("#food_menu option:selected").text();
-    $("#method").html(info[num].Method)
-
-    for (var i = 0; i < info.length; i++) {
-      if (selection == info[i].Brand) {
-        food_array.push(info[i])
-      }
-      if (food_array.length == 3) {
-        break
-      }
-    }
-
-    console.log(food_array)
-
-    var carbs = ( parseInt(food_array[num].Carbs) ? parseInt(info[num].Carbs) : 0)
-
-    var foodData=[
-      {label:"Protein", color:"#3366CC", value: parseInt(food_array[num].Protein) },
-      {label:"Fat", color:"#DC3912", value: parseInt(food_array[num].Fat) },
-      {label:"Carbs", color:"#FF9900", value: carbs },
-      {label:"Other Weight", color:"#ffffff", value: (100 - parseInt(info[1].Protein) - parseInt(info[1].Fat) - carbs)}
-    ];
-
-    Donut3D.transition("salesDonut", updateData(), 130, 100, 20, 0.3);
-    Donut3D.transition("quotesDonut", updateData(), 130, 100, 20, 0.3);
-
-    function updateData(){
-      return foodData.map(function(d){
-        return {label:d.label, value:d.value, color:d.color};
-      });
-    };
-
-    d3.csv("/csv/ingredients.csv", function(err, more_info) {
-      for (var i = 0; i <= more_info.length; i++) {
-        if (more_info[i].Brand == $("#food_menu option:selected").text()) {
-          $("#ingredients").html(more_info[i].Ingredients)
-          break
-        }
-      }
-    });
-  });
-};

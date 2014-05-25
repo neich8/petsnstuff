@@ -13,18 +13,11 @@ var messageBoard = require('./routes/messageboard')
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/petsnstuff');
 
-
-
 var app = express();
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-
 
 app.use(favicon());
 app.use(logger('dev'));
@@ -34,9 +27,6 @@ app.use(methodOverride());
 app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-
 
 
 // app.use('/', routes);

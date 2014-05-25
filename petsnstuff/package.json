@@ -6,15 +6,21 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
-    "express": "~4.2.0",
-    "static-favicon": "~1.0.0",
-    "morgan": "~1.0.0",
-    "cookie-parser": "~1.0.1",
     "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",
-    "hogan-express": "*",
+    "ejs": "^1.0.0",
+    "express": "~4.2.0",
+    "express-session": "^1.2.0",
+    "hjs": "*",
     "less-middleware": "1.0.x",
+    "method-override": "^1.0.1",
     "mongodb": "*",
-    "monk": "*"
+    "mongoose": "~3.6.13",
+    "monk": "*",
+    "morgan": "~1.0.0",
+    "passport": "^0.2.0",
+    "passport-facebook": "^1.0.3",
+    "static-favicon": "~1.0.0"
   }
 }

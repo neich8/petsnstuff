@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Message Bored</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  	<form action="/edit/<%= edit.id %>" method="post">
+  		<input type="string" name="title"  value="<%= edit.title%>">
+  		<textarea rows="10" cols="30" name="post"><%= edit.post%></textarea>
+  		<button type="submit">Edit Add if statement!!!!!!!</button>
+    </form>
+   </body>
+</html>

@@ -2,6 +2,7 @@ var Post = require("../models/post");
 module.exports = function(app) {
 
 	app.get('/messageboard', function(req, res){
+		console.log(req.session.userName)
 		Post.find({}, function(err,post){
 			if (err) {
 				res.redirect('/')

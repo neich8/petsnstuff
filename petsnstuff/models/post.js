@@ -6,7 +6,6 @@ var postSchema = new Schema({
 	title: String,
 	post: String,
 	user: String
-
 })
 
 

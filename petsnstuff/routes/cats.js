@@ -1,16 +1,18 @@
 var User = require("../models/user");
+var passport = require('passport')
 module.exports = function(app){
 
 
-
 app.get('/', function(req, res) {
+	
   res.render('index', { title: "Pets 'n Stuff" });
 });
 
 
-app.post("/newuser", function(req, res) {
-	console.log(req.body)
 
+app.post("/newuser", function(req, res) {
+	
+	
 	var user = new User({
 		userName: req.body.username,
 		email: req.body.email});
@@ -19,6 +21,7 @@ app.post("/newuser", function(req, res) {
 	 	  console.log('meow');
 		} 
 		else {
+			req.session.userName = "Hello"
 			console.log(user)
 			res.redirect("profile/" + user._id);
 		}
@@ -33,6 +36,8 @@ console.log("signin")
 })
 
 app.get("/profile/:id", function(req, res) {
+	console.log(req.session.userName)
+
 		var id = req.params.id
 
 		User.findById(id, function(err,user) {

@@ -7,7 +7,7 @@
   <body>
   	<h1>Hey <%= profile.userName%> your here!</h1>
     <h3>Add your Pet!<h3>
-      <form action="/create" method="post">
+      <form action="/create/<%= profile._id %>" method="post">
         <input type="string" name="name" placeholder="name">
         <input type="integer"name="age" placeholder="age">
         <input type="string" name="shots" placeholder="shots">

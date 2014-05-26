@@ -10,5 +10,4 @@ var nutritionSchema = new Schema ({
   Carbs: Number
 });
 
-
 module.exports = mongoose.model('Nutrition', nutritionSchema);

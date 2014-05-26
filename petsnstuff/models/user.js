@@ -2,9 +2,6 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-
-
-
 var petSchema = new Schema({
 	name: String,
 	age: Number,
@@ -13,7 +10,6 @@ var petSchema = new Schema({
 	type: String,
 	photo: String
 })
-
 
 var userSchema = new Schema({
 	userName: String,

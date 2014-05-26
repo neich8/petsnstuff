@@ -133,8 +133,8 @@ $(document).ready(function() {
     {label:"Other Weight", color:"#ffffff", value: 100 - foods[0] - foods[1] - foods[2]}
   ];
 
-  Donut3D.draw("leftGraph", updateData(foodData), 150, 100, 130, 100, 20, 0.3);
-  Donut3D.draw("rightGraph", updateData(foodData), 550, 100, 130, 100, 20, 0.3);
+  Donut3D.draw("leftGraph", updateData(foodData), 160, 105, 130, 100, 20, 0.3);
+  Donut3D.draw("rightGraph", updateData(foodData), 580, 105, 130, 100, 20, 0.3);
 
   changeData("left", foodData)
   changeData("right", foodData)

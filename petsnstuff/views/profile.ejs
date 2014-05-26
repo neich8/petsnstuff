@@ -16,12 +16,12 @@
            var tabs = $( "#tabs" ).tabs();
           
          
-          //This adds the custom buttons and a close callback reseting the form inside
+          //This adds the custom buttons and a close callback reseting the form inside 
           var dialog = $( "#dialog" ).dialog({
             autoOpen: false,
             modal: true,
             buttons: {
-              Add: function() {
+              Submit: function() {
                 addTab();
                 $( this ).dialog( "close" );
               },
@@ -100,7 +100,7 @@
             <input type="text" name="age" id="tab_title" value="" class="ui-widget-content ui-corner-all" size="4">
             <input type="text" name="weight" id="tab_title" value="" class="ui-widget-content ui-corner-all" size="4"><br><br>
             <label for="tab_title">License Number</label> 
-            <input type="text" name="licensenumber" id="tab_title" value="" class="ui-widget-content ui-corner-all"><br>
+            <input type="text" name="license" id="tab_title" value="" class="ui-widget-content ui-corner-all"><br>
 
             <label for="tab_title">Breed</label><br>
             <input type="text" name="breed" id="tab_title" value="" class="ui-widget-content ui-corner-all">
@@ -110,26 +110,11 @@
 
 
             <p>Immunizations:</p>
-            <label for="tab_title">Shot Type:</label>
-            <label for="tab_title">&nbsp;&nbsp;&nbsp; Date Administered:</label><br>
-            <input type="checkbox" name="parvovirus" id="tab_title" value="" class="ui-widget-content ui-corner-all">Parvovirus 
-            <input type="date" id="parvovirus" value="parvodate" size="4"><br>
-            
-            <input type="checkbox" name="distemper" id="tab_title" value="" class="ui-widget-content ui-corner-all">
-            Distemper
-            <input type="date" id="distemper" value="distemper" size="4"><br>
 
-            <input type="checkbox" name="rabies" id="tab_title" value="" class="ui-widget-content ui-corner-all">
-            Rabies
-            <input type="date" id="rabies" value="parvodate" size="4"><br>
-            <input type="checkbox" name="bordetella" id="tab_title" value="" class="ui-widget-content ui-corner-all">
-            Bordetella
-            <input type="date" id="bordetella" value="parvodate" size="4"><br>
-            <input type="checkbox" name="borrelia" id="tab_title" value="" class="ui-widget-content ui-corner-all">
-            Borrelia
-            <input type="date" id="borrelia" value="parvodate" size="4"><br>
-            
-            
+            <input type="text" name="shotName" id="tab_title" value="" class="ui-widget-content ui-corner-all">
+
+            <label for="tab_title">&nbsp;&nbsp;&nbsp; Date Administered:</label><br>
+            <input type="text" name="date" id="tab_title" value="" class="ui-widget-content ui-corner-all">
           </fieldset>
         </form>
       </div>

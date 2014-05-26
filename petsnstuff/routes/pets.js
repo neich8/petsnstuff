@@ -1,17 +1,25 @@
 var User = require("../models/user")["User"];
 var Pet = require("../models/user")["Pet"];
+var Shot = require("../models/user")["Shot"]; //Guido
+
 module.exports = function(app) {
 
 app.post('/create/:id', function(req, res) {
 	var id = req.params.id
 
+           // var shot = {
+           // 	shotName: req.body.shotName,
+           // 	examDate: req.body.date
+
+           // }
 			var pet = {
 			name: req.body.name,
 			age: req.body.age,
-			shots: req.body.shots,
 			weight: req.body.weight,
-			type: req.body.type,
-			photo: req.body.photo
+			license: req.body.license,
+			breed: req.body.breed,
+			markings: req.body.markings
+			//photo: req.body.photo
 		}
 
 		// console.log(pet)
@@ -24,6 +32,7 @@ app.post('/create/:id', function(req, res) {
 					console.log(users[0])
 					user = users[0]
 					user.pets.push(pet)
+					// user.pets.shots.push(shot) // Guido 
 					user.save(function(err, user) {})
 					res.redirect("/profile/" + id)
 				}

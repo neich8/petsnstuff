@@ -3,9 +3,10 @@ var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var expressSession = require('express-session');
+// var expressSession = require('express-session');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var session = require('cookie-session')
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -26,8 +27,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(methodOverride());
-app.use(cookieParser('S3CRE7'));
-app.use(expressSession());
+app.use(session({keys: ["asdf"]}))
 
 
 

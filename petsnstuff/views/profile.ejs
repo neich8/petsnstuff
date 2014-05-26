@@ -8,7 +8,7 @@
     <div id="content">
     <!-- Begin Guido Experiment -->
       <div id="dialog" title="Pet Information">
-        <form action="/create" method="post">
+        <form action="/create/<%= profile._id %>"  method="post">
           <fieldset class="ui-helper-reset">
             <label for="tab_title">Name</label>
             <input type="text" name="name" id="tab_title" value="" class="ui-widget-content ui-corner-all"><br>
@@ -33,7 +33,9 @@
         </form>
       </div>
         <h1> Hey <%= profile.userName %> Welcome to your pets profile</h1>
-
+        <% if(profile.pets[0]) { %>
+        <h1> Pet: <%= profile.pets[0].name%><h1>
+          <% } %>
         <div id="tabs">
           <ul>
             <li><a href="#tabs-1">Add your pet here!</a> <!-- <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span> --></li>

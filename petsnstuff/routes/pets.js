@@ -2,6 +2,7 @@ var User = require("../models/user")["User"];
 var Pet = require("../models/user")["Pet"];
 module.exports = function(app) {
 	app.post('/create/:id', function(req, res) {
+		console.log("Pet is creating")
 		var id = req.params.id
 		var pet = {
 			name: req.body.name,

@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Profile</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    <script src="/scripts/jquery-1.11.1.min.js"></script>
-    <script src="/scripts/jquery-ui-1.10.4.min.js"></script>
-    <script src="scripts/profile.js"></script>
-  </head>
-  <body>
-    <% include nav.ejs %>
+<% include _html_header.ejs %>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="/scripts/jquery-ui-1.10.4.min.js"></script>
+<script src="scripts/profile.js"></script>
+<% include _nav.ejs %>
  <!--  The code below the creates html form when you -->
   <div id="wrapper">
     <div id="content">
@@ -32,42 +25,24 @@
             <label for="tab_title">Color/Markings</label><br>
             <input type="text" name="markings" id="tab_title" value="" class="ui-widget-content ui-corner-all">
 
-
             <p>Immunizations:</p>
 
             <label for="tab_title">&nbsp;&nbsp;&nbsp; Date Administered:</label><br>
             <input type="checkbox" name="parvovirus" id="tab_title" value="" class="ui-widget-content ui-corner-all">
-
-
-
           </fieldset>
         </form>
       </div>
-
-        <!-- <h1>Hey <%= profile.userName%> your here!</h1>
-    <h3>Add your Pet!<h3>
-      <form action="/create/<%= profile._id %>" method="post">
-        <input type="string" name="name" placeholder="name">
-        <input type="integer"name="age" placeholder="age">
-        <input type="string" name="shots" placeholder="shots">
-        <input type="string" name= "weight" placeholder="weight">
-        <input type="integer"name= "type" placeholder="type">
-        <input type="string" name= "photo" placeholder="photo">
-        <button type="submit">Add!</button> -->
         <h1> Hey <%= profile.userName %> Welcome to your pets profile</h1>
 
-         <div id="tabs">
-        <ul>
-          <li><a href="#tabs-1">Add your pet here!</a> <!-- <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span> --></li>
-        </ul>
-          <div id="tabs-1">
-            <p>Hello please add a pet(s) to your profile.  If this breaks your SOL!</p>
-            <button id="add_tab">Add Pet</button>
-          </div>
+        <div id="tabs">
+          <ul>
+            <li><a href="#tabs-1">Add your pet here!</a> <!-- <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span> --></li>
+          </ul>
+        <div id="tabs-1">
+          <p>Hello please add a pet(s) to your profile.  If this breaks your SOL!</p>
+          <button id="add_tab">Add Pet</button>
+        </div>
       </div>
-          <br>
-
     </div>
-
-  </body>
-  </html>
+  </div>
+<% include _html_footer.ejs %>

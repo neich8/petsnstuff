@@ -13,15 +13,13 @@ module.exports = function(app) {
 				console.log(post)
 
 				res.render('messageboard', {
+					'title' : "Message Board",
 					'messageboard' : post,
 					'id' : id
 				})
 			}
 		})
-
 	});
-
-
 
 	app.post("/delete/:id", function(req, res){
 		console.log("in the delete method")
@@ -57,7 +55,6 @@ module.exports = function(app) {
 		SavePost(post, res)
 	});
 
-
 	app.get("/edit/:id", function(req,res) {
 		var id = req.params.id
 		Post.findById(id, function(err, post){
@@ -74,7 +71,7 @@ module.exports = function(app) {
 			title: req.body.title,
 			post: req.body.post
 		}
-		Post.findOneAndUpdate({_id: id}, fdnewPost,function(err, post){
+		Post.findOneAndUpdate({_id: id}, newPost,function(err, post){
 			if (err) {
 				console.log("Shits broke")
 			}
@@ -86,7 +83,6 @@ module.exports = function(app) {
 	});
 }
 
-
 function SavePost(post, res){
 	post.save(function (err, post) {
 		if(err){
@@ -97,4 +93,3 @@ function SavePost(post, res){
 		}
 	});
 }
-

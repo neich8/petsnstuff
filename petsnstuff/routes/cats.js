@@ -5,15 +5,12 @@ var Ingredient = require("../models/ingredient")
 var passport = require('passport')
 module.exports = function(app){
 
-
 app.get('/', function(req, res) {
-
 	Nutrition.find({ Brand: "Alpo Dog Food (Dry)"}).select('-_id').exec(function(err, food) {
 		Ingredient.find({}, function(err, ingredients) {
 			res.render('index', { title: "Pets 'n Stuff", foods: food, ingredients: ingredients} );
 		});
 	});
-
 });
 
 app.post('/brands/:brand_name', function(req, res) {
@@ -25,7 +22,6 @@ app.post('/brands/:brand_name', function(req, res) {
 });
 
 app.post("/newuser", function(req, res) {
-
 	var user = new User({
 		userName: req.body.username,
 		email: req.body.email});
@@ -39,7 +35,6 @@ app.post("/newuser", function(req, res) {
 			res.redirect("/profile");
 		}
 	});
-
 });
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
@@ -47,10 +42,11 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook',
   	 { successRedirect: '/',
-      failureRedirect: '/login' }));
+      failureRedirect: '/login' }
+  )
+);
 
 app.post("/signin/:id", function(req, res) {
-
 		var username = req.body.username
 		var email = req.body.email
 		User.find({userName: username}, function(err, user) {
@@ -70,25 +66,26 @@ app.get("/profile", function(req, res) {
 	console.log("hello")
 	console.log(req.session.userid)
 
-		var id = req.session.userid
-		if(id) {
-		User.findById(id, function(err,user) {
-			if (err) {
-				console.log("shits broke yo!")
+	var id = req.session.userid
+	if(id) {
+	User.findById(id, function(err,user) {
+		if (err) {
+			console.log("shits broke yo!")
 	 	  res.redirect("/")
-			}
+		}
 		else {
 			console.log(user)
 			res.render('profile', {
-            "profile" : user
-        });
+        "title" : "User profile",
+        "profile" : user
+      });
 		}
 	});
 	}
 	else {
 	res.redirect("/")
-}
-})
+	};
+});
 
 app.post("/edit/:id")
 

@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/charts.css' />
-    <link rel='stylesheet' href='stylesheets/frontpage.css'/>
-    <script src="/scripts/jquery-1.11.1.min.js"></script>
-    <script src="/scripts/d3.min.js"></script>
-    <script src="/scripts/chartlogic.js"></script>
-  </head>
-  <body>
-
+ <% include _html_header.ejs %>
+ <link rel='stylesheet' href='/stylesheets/charts.css' />
+ <link rel='stylesheet' href='stylesheets/frontpage.css'/>
+ <script src="/scripts/d3.min.js"></script>
+ <script src="/scripts/chartlogic.js"></script>
  <a href="/auth/facebook">Login with Facebook</a>
-    <% include nav.ejs %>
+    <% include _nav.ejs %>
     <div id="wrapper">
       <div id="content">
         <h1>Welcome to <%= title %></h1>
@@ -35,12 +27,12 @@
           <label>Dry Matter Basis<input type="radio" class="radio_button" id="dry_matter_basis" name="method" onclick="change_analysis(1)"/></label>
           <label>Calorie Weighted Basis<input type="radio" class="radio_button" id="calorie_weighted_basis" name="method" onclick="change_analysis(2)"/></label>
           <br/>
-          <div class="hidden foods left_foods" id="food0_left"><%= foods[0].Protein + "," + foods[0].Fat + "," + foods[0].Carbs %></div>
-          <div class="hidden foods left_foods" id="food1_left"><%= foods[1].Protein + "," + foods[1].Fat + "," + foods[1].Carbs %></div>
-          <div class="hidden foods left_foods" id="food2_left"><%= foods[2].Protein + "," + foods[2].Fat + "," + foods[2].Carbs %></div>
-          <div class="hidden foods right_foods" id="food0_right"><%= foods[0].Protein + "," + foods[0].Fat + "," + foods[0].Carbs %></div>
-          <div class="hidden foods right_foods" id="food1_right"><%= foods[1].Protein + "," + foods[1].Fat + "," + foods[1].Carbs %></div>
-          <div class="hidden foods right_foods" id="food2_right"><%= foods[2].Protein + "," + foods[2].Fat + "," + foods[2].Carbs %></div>
+          <% for (var i = 0; i <= 2; i ++ )  { %>
+            <div class="hidden foods left_foods" id="food<%= i %>_left"><%= foods[i].Protein + "," + foods[i].Fat + "," + foods[i].Carbs %></div>
+          <% } %>
+          <% for (var i = 0; i <= 2; i ++ )  { %>
+            <div class="hidden foods right_foods" id="food<%= i %>_right"><%= foods[i].Protein + "," + foods[i].Fat + "," + foods[i].Carbs %></div>
+          <% } %>
           <br/>
           <div class="colorkey" id="key1"></div><span class="keylabel">Protein</span>
           <div class="colorkey" id="key2"></div><span class="keylabel">Fat</span>
@@ -66,5 +58,5 @@
         </div>
       </div>
     </div>
-  </body>
-</html>
+    <% include _html_footer.ejs %>
+

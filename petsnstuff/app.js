@@ -29,8 +29,6 @@ app.use(bodyParser.urlencoded());
 app.use(methodOverride());
 app.use(session({keys: ["asdf"]}))
 
-
-
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 

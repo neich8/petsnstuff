@@ -139,6 +139,7 @@ $(document).ready(function() {
   changeData("left", foodData)
   changeData("right", foodData)
 
+  $($(".percent")[3]).remove();
   document.getElementById("guaranteed_analysis").checked = true;
 
 });

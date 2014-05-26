@@ -34,7 +34,7 @@ app.post("/newuser", function(req, res) {
 	 	  console.log('meow');
 		}
 		else {
-			req.cookie.userid = user._id
+			req.session.userid = user._id
 			console.log(req.session.userid)
 			res.redirect("/profile");
 		}
@@ -44,7 +44,7 @@ app.post("/newuser", function(req, res) {
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
-app.get('/auth/facebook/callback', 
+app.get('/auth/facebook/callback',
   passport.authenticate('facebook',
   	 { successRedirect: '/',
       failureRedirect: '/login' }));
@@ -54,7 +54,7 @@ app.post("/signin/:id", function(req, res) {
 		var username = req.body.username
 		var email = req.body.email
 		User.find({userName: username}, function(err, user) {
-		
+
 		if(user[0].email === email) {
 
 			res.redirect("/profile")
@@ -68,7 +68,7 @@ app.post("/signin/:id", function(req, res) {
 
 app.get("/profile", function(req, res) {
 	console.log("hello")
-	console.log(req.cookie.userid)
+	console.log(req.session.userid)
 
 		var id = req.session.userid
 		if(id) {

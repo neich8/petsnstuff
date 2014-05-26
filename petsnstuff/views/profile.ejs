@@ -4,27 +4,12 @@
     <title>Profile</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script type="text/javascript">
-
-
-  </script>
+    <script src="/scripts/jquery-1.11.1.min.js"></script>
+    <script src="/scripts/jquery-ui-1.10.4.min.js"></script>
+    <script src="scripts/profile.js"></script>
   </head>
-
   <body>
-    <div id="nav">
-      <div id="nav-wrapper">
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Dog Food</a></li>
-          <li><a href="#">Nick's Cat</a></li>
-          <li><a href="#">MoleMan</a></li>
-          <li><a href="#">Logout</a></li>
-
-        </ul>
-      </div>
-    </div>
+    <% include nav.ejs %>
  <!--  The code below the creates html form when you -->
   <div id="wrapper">
     <div id="content">
@@ -49,31 +34,17 @@
 
 
             <p>Immunizations:</p>
-            <label for="tab_title">Shot Type:</label>
+
             <label for="tab_title">&nbsp;&nbsp;&nbsp; Date Administered:</label><br>
-            <input type="checkbox" name="parvovirus" id="tab_title" value="" class="ui-widget-content ui-corner-all">Parvovirus
-            <input type="date" id="parvovirus" value="parvodate" size="4"><br>
+            <input type="checkbox" name="parvovirus" id="tab_title" value="" class="ui-widget-content ui-corner-all">
 
-            <input type="checkbox" name="distemper" id="tab_title" value="" class="ui-widget-content ui-corner-all">
-            Distemper
-            <input type="date" id="distemper" value="distemper" size="4"><br>
-
-            <input type="checkbox" name="rabies" id="tab_title" value="" class="ui-widget-content ui-corner-all">
-            Rabies
-            <input type="date" id="rabies" value="parvodate" size="4"><br>
-            <input type="checkbox" name="bordetella" id="tab_title" value="" class="ui-widget-content ui-corner-all">
-            Bordetella
-            <input type="date" id="bordetella" value="parvodate" size="4"><br>
-            <input type="checkbox" name="borrelia" id="tab_title" value="" class="ui-widget-content ui-corner-all">
-            Borrelia
-            <input type="date" id="borrelia" value="parvodate" size="4"><br>
 
 
           </fieldset>
         </form>
       </div>
 
-  	<!-- <h1>Hey <%= profile.userName%> your here!</h1>
+        <!-- <h1>Hey <%= profile.userName%> your here!</h1>
     <h3>Add your Pet!<h3>
       <form action="/create/<%= profile._id %>" method="post">
         <input type="string" name="name" placeholder="name">

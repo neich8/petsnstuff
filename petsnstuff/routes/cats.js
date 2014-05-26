@@ -1,5 +1,5 @@
 var User = require("../models/user")["User"];;
-var Nutrition = require("../models/nutrion");
+var Nutrition = require("../models/nutrition");
 var Ingredient = require("../models/ingredient")
 
 var passport = require('passport')

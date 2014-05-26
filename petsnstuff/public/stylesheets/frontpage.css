@@ -1,0 +1,59 @@
+#ingredients_left {
+  float: left;
+  width: 350px
+}
+
+#ingredients_right {
+  float: left;
+  width: 350px;
+}
+
+.colorkey {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+}
+
+.radio_button {
+  margin-right: 70px;
+}
+.keylabel {
+  margin-left: 5px;
+  margin-right: 15px;
+}
+
+#key1 {
+  background-color: #3366CC;
+}
+
+#key2 {
+  background-color: #DC3912;
+}
+
+#key3 {
+  background-color: #FF9900;
+}
+
+#chart_container {
+  margin-left: 90px;
+}
+
+.select_menu {
+  font-size: 1em;
+}
+
+#food_menu_left {
+
+}
+
+#food_menu_right {
+  margin-left: 100px;
+}
+
+#ingredients_left {
+
+}
+
+#ingredients_right {
+  margin-left: 70px;
+}

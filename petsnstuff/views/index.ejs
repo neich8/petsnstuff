@@ -4,57 +4,68 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/charts.css' />
+    <link rel='stylesheet' href='stylesheets/frontpage.css'/>
     <script src="/scripts/jquery-1.11.1.min.js"></script>
     <script src="/scripts/d3.min.js"></script>
     <script src="/scripts/chartlogic.js"></script>
   </head>
   <body>
-    <a href="/auth/facebook">Login with Facebook</a>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <a href="/messageboard">Messageboard</a>
-    <h5>Create Account</h5>
-    <form action="/newuser" method='post'>
-    	<input type="string" name="username" placeholder="Username"/>
-    	<input type="email" name="email" placeholder="Email"/>
-    	<input type="submit" placeholder="Create"/>
-    </form>
-    <h5>Signin</h5>
-    <form action="/signin" method='post'>
-    	<input type="string" name="username" placeholder="Username"/>
-    	<input type="email" name="email" placeholder="Email"/>
-    	<input type="submit" placeholder="Signin"/>
-    </form>
-    <br/>
-    <br/>
-    Guaranteed Analysis<input type="radio" id="guaranteed_analysis" name="method" onclick="change_analysis(0)"/><br/>
-    Dry Matter Basis<input type="radio" id="dry_matter_basis" name="method" onclick="change_analysis(1)"/><br/>
-    Calorie Weighted Basis<input type="radio" id="calorie_weighted_basis" name="method" onclick="change_analysis(2)"/><br/>
 
-    <div class="hidden foods left_foods" id="food0_left"><%= foods[0].Protein + "," + foods[0].Fat + "," + foods[0].Carbs %></div>
-    <div class="hidden foods left_foods" id="food1_left"><%= foods[1].Protein + "," + foods[1].Fat + "," + foods[1].Carbs %></div>
-    <div class="hidden foods left_foods" id="food2_left"><%= foods[2].Protein + "," + foods[2].Fat + "," + foods[2].Carbs %></div>
-    <div class="hidden foods right_foods" id="food0_right"><%= foods[0].Protein + "," + foods[0].Fat + "," + foods[0].Carbs %></div>
-    <div class="hidden foods right_foods" id="food1_right"><%= foods[1].Protein + "," + foods[1].Fat + "," + foods[1].Carbs %></div>
-    <div class="hidden foods right_foods" id="food2_right"><%= foods[2].Protein + "," + foods[2].Fat + "," + foods[2].Carbs %></div>
-
-    <svg id="chart">
-        <g id="leftGraph"></g>
-        <g id="rightGraph"></g>
-    </svg>
-    <br/>
-    <select class="select_menu" id="food_menu_left" onchange="change_brand('left')">
-        <% for (var i = 0; i < ingredients.length; i ++) {%>
-        <option><%= ingredients[i].Brand %></option>
-        <% } %>
-    </select>
-    <select class="select_menu" id="food_menu_right" onchange="change_brand('right')">
-        <% for (var i = 0; i < ingredients.length; i ++) {%>
-        <option><%= ingredients[i].Brand %></option>
-        <% } %>
-    </select>
-    <br/>
-    <p class="ingredients" id="ingredients_left"><%= ingredients[0].Ingredients %></p>
-    <p class="ingredients" id="ingredients_right"><%= ingredients[0].Ingredients %></p>
+ <a href="/auth/facebook">Login with Facebook</a>
+    <% include nav.ejs %>
+    <div id="wrapper">
+      <div id="content">
+        <h1>Welcome to <%= title %></h1>
+        <h5>Signin</h5>
+        <form action="/signin" method='post'>
+          <input type="string" name="username" placeholder="Username"/>
+          <input type="email" name="email" placeholder="Email"/>
+          <input type="submit" placeholder="Signin"/>
+        </form>
+        <h5>Create Account</h5>
+        <form action="/newuser" method='post'>
+          <input type="string" name="username" placeholder="Username"/>
+          <input type="email" name="email" placeholder="Email"/>
+          <input type="submit" placeholder="Create"/>
+        </form>
+        <br/>
+        <br/>
+        <div id="chart_container">
+          <label>Guaranteed Analysis<input type="radio" class="radio_button" id="guaranteed_analysis" name="method" onclick="change_analysis(0)"/></label>
+          <label>Dry Matter Basis<input type="radio" class="radio_button" id="dry_matter_basis" name="method" onclick="change_analysis(1)"/></label>
+          <label>Calorie Weighted Basis<input type="radio" class="radio_button" id="calorie_weighted_basis" name="method" onclick="change_analysis(2)"/></label>
+          <br/>
+          <div class="hidden foods left_foods" id="food0_left"><%= foods[0].Protein + "," + foods[0].Fat + "," + foods[0].Carbs %></div>
+          <div class="hidden foods left_foods" id="food1_left"><%= foods[1].Protein + "," + foods[1].Fat + "," + foods[1].Carbs %></div>
+          <div class="hidden foods left_foods" id="food2_left"><%= foods[2].Protein + "," + foods[2].Fat + "," + foods[2].Carbs %></div>
+          <div class="hidden foods right_foods" id="food0_right"><%= foods[0].Protein + "," + foods[0].Fat + "," + foods[0].Carbs %></div>
+          <div class="hidden foods right_foods" id="food1_right"><%= foods[1].Protein + "," + foods[1].Fat + "," + foods[1].Carbs %></div>
+          <div class="hidden foods right_foods" id="food2_right"><%= foods[2].Protein + "," + foods[2].Fat + "," + foods[2].Carbs %></div>
+          <br/>
+          <div class="colorkey" id="key1"></div><span class="keylabel">Protein</span>
+          <div class="colorkey" id="key2"></div><span class="keylabel">Fat</span>
+          <div class="colorkey" id="key3"></div><span class="keylabel">Carbs</span>
+          <br/>
+           <select class="select_menu" id="food_menu_left" onchange="change_brand('left')">
+              <% for (var i = 0; i < ingredients.length; i ++) {%>
+              <option><%= ingredients[i].Brand %></option>
+              <% } %>
+          </select>
+          <select class="select_menu" id="food_menu_right" onchange="change_brand('right')">
+              <% for (var i = 0; i < ingredients.length; i ++) {%>
+              <option><%= ingredients[i].Brand %></option>
+              <% } %>
+          </select>
+          <br/>
+          <svg id="chart">
+              <g id="leftGraph"></g>
+              <g id="rightGraph"></g>
+          </svg>
+          <p class="ingredients" id="ingredients_left"><%= ingredients[0].Ingredients %></p>
+          <p class="ingredients" id="ingredients_right"><%= ingredients[0].Ingredients %></p>
+        </div>
+      </div>
+    </div>
+>>>>>>> master
   </body>
 </html>

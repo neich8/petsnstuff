@@ -8,70 +8,10 @@
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script type="text/javascript">
 
-    $(function() {
-         var tabTitle = $( "#tab_title" ),
-           tabContent = $( "#tab_content" ),
-           tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close'>Remove Tab</span></li>",
-           tabCounter = 2;
-           var tabs = $( "#tabs" ).tabs();
-          
-         
-          //This adds the custom buttons and a close callback reseting the form inside
-          var dialog = $( "#dialog" ).dialog({
-            autoOpen: false,
-            modal: true,
-            buttons: {
-              Add: function() {
-                addTab();
-                $( this ).dialog( "close" );
-              },
-              Cancel: function() {
-                $( this ).dialog( "close" );
-              }
-            },
-            close: function() {
-              form[ 0 ].reset();
-            }
-          });
 
-          
-          //This calls th addTab function on submit and closed the box/dialog
-          var form = dialog.find( "form" ).submit(function( event ) {
-            addTab();
-            dialog.dialog( "close" );
-            event.preventDefault();
-          });
-
-    
-    //The function below adds a new tab using the input from the form that is created above
-    function addTab() {
-      var label = tabTitle.val() || "Tab " + tabCounter,
-        id = "tabs-" + tabCounter,
-        li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
-        tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
-        tabs.find( ".ui-tabs-nav" ).append( li );
-        tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p></div>" );
-      tabs.tabs( "refresh" );
-      tabCounter++;
-    }
-
-    // This opens the dialog
-    $( "#add_tab" )
-      .button()
-      .click(function() {
-        dialog.dialog( "open" );
-      });
-
-    // This function closes the new tab
-    //Need to change the live () method to more recent...perhaps .on()
-    $( "#tabs span.ui-icon-close" ).live( "click", function() {
-      var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
-      $( "#" + panelId ).remove();
-      tabs.tabs( "refresh" );
-    });
-  });
   </script>
   </head>
+
   <body>
     <div id="nav">
       <div id="nav-wrapper">
@@ -81,11 +21,11 @@
           <li><a href="#">Nick's Cat</a></li>
           <li><a href="#">MoleMan</a></li>
           <li><a href="#">Logout</a></li>
-          
+
         </ul>
       </div>
     </div>
- <!--  The code below the creates html form when you --> 
+ <!--  The code below the creates html form when you -->
   <div id="wrapper">
     <div id="content">
     <!-- Begin Guido Experiment -->
@@ -93,20 +33,47 @@
         <form action="/create" method="post">
           <fieldset class="ui-helper-reset">
             <label for="tab_title">Name</label>
-            <input type="text" name="name" id="tab_title" value="" class="ui-widget-content ui-corner-all">
-            <label for="tab_content">Age</label>
-            <input type="text" name="age" id="tab_title" value="" class="ui-widget-content ui-corner-all">
-            <label for="tab_title">Shots</label>
-            <input type="text" name="shots" id="tab_title" value="" class="ui-widget-content ui-corner-all">
-            <label for="tab_title">Weight</label>
-            <input type="text" name="weight" id="tab_title" value="" class="ui-widget-content ui-corner-all">
-            <label for="tab_title">Type</label>
-            <input type="text" name="type" id="tab_title" value="" class="ui-widget-content ui-corner-all">
+            <input type="text" name="name" id="tab_title" value="" class="ui-widget-content ui-corner-all"><br>
+            <label for="tab_content">Age&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="tab_content">Approx. Weight</label><br>
+            <input type="text" name="age" id="tab_title" value="" class="ui-widget-content ui-corner-all" size="4">
+            <input type="text" name="weight" id="tab_title" value="" class="ui-widget-content ui-corner-all" size="4"><br><br>
+            <label for="tab_title">License Number</label>
+            <input type="text" name="licensenumber" id="tab_title" value="" class="ui-widget-content ui-corner-all"><br>
+
+            <label for="tab_title">Breed</label><br>
+            <input type="text" name="breed" id="tab_title" value="" class="ui-widget-content ui-corner-all">
+
+            <label for="tab_title">Color/Markings</label><br>
+            <input type="text" name="markings" id="tab_title" value="" class="ui-widget-content ui-corner-all">
+
+
+            <p>Immunizations:</p>
+            <label for="tab_title">Shot Type:</label>
+            <label for="tab_title">&nbsp;&nbsp;&nbsp; Date Administered:</label><br>
+            <input type="checkbox" name="parvovirus" id="tab_title" value="" class="ui-widget-content ui-corner-all">Parvovirus
+            <input type="date" id="parvovirus" value="parvodate" size="4"><br>
+
+            <input type="checkbox" name="distemper" id="tab_title" value="" class="ui-widget-content ui-corner-all">
+            Distemper
+            <input type="date" id="distemper" value="distemper" size="4"><br>
+
+            <input type="checkbox" name="rabies" id="tab_title" value="" class="ui-widget-content ui-corner-all">
+            Rabies
+            <input type="date" id="rabies" value="parvodate" size="4"><br>
+            <input type="checkbox" name="bordetella" id="tab_title" value="" class="ui-widget-content ui-corner-all">
+            Bordetella
+            <input type="date" id="bordetella" value="parvodate" size="4"><br>
+            <input type="checkbox" name="borrelia" id="tab_title" value="" class="ui-widget-content ui-corner-all">
+            Borrelia
+            <input type="date" id="borrelia" value="parvodate" size="4"><br>
+
+
           </fieldset>
         </form>
       </div>
 
-  	<h1>Hey <%= profile.userName%> your here!</h1>
+  	<!-- <h1>Hey <%= profile.userName%> your here!</h1>
     <h3>Add your Pet!<h3>
       <form action="/create/<%= profile._id %>" method="post">
         <input type="string" name="name" placeholder="name">
@@ -115,20 +82,20 @@
         <input type="string" name= "weight" placeholder="weight">
         <input type="integer"name= "type" placeholder="type">
         <input type="string" name= "photo" placeholder="photo">
-        <button type="submit">Add!</button>
-
+        <button type="submit">Add!</button> -->
+        <h1> Hey <%= profile.userName %> Welcome to your pets profile</h1>
 
          <div id="tabs">
         <ul>
-          <li><a href="#tabs-1">Hey <%= profile.userName %> your here!</a> <!-- <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span> --></li>
+          <li><a href="#tabs-1">Add your pet here!</a> <!-- <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span> --></li>
         </ul>
           <div id="tabs-1">
             <p>Hello please add a pet(s) to your profile.  If this breaks your SOL!</p>
+            <button id="add_tab">Add Pet</button>
           </div>
       </div>
           <br>
-     
-      <button id="add_tab">Add Pet</button>
+
     </div>
 
   </body>

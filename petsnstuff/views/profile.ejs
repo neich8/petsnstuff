@@ -51,6 +51,10 @@
             <p>Breed: <%= pets[i].breed %></p>
             <p>Markings: <%= pets[i].markings %></p>
           </div>
+          <form id="image_upload" method="post" enctype="multipart/form-data" action="/file-upload/<%= pets[i].id %>" data="<%= pets.id[i] %>">
+            <input type="file" name="thumbnail">
+            <input type="submit">
+          </form>
         <% } %>
           <div id="tabs-1">
           <button id="add_tab">Add Pet</button>

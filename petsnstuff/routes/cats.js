@@ -1,4 +1,4 @@
-var User = require("../models/user")["User"];;
+var User = require("../models/user")["User"];
 var Nutrition = require("../models/nutrition");
 var Ingredient = require("../models/ingredient")
 
@@ -6,6 +6,9 @@ var passport = require('passport')
 module.exports = function(app){
 
 app.get('/', function(req, res) {
+	 passport.authenticate('facebook',
+	  	 { successRedirect: '/profile',
+      failureRedirect: '/' })
 	Nutrition.find({ Brand: "Alpo Dog Food (Dry)"}).select('-_id').exec(function(err, food) {
 		Ingredient.find({}, function(err, ingredients) {
 			res.render('index', { title: "Pets 'n Stuff", foods: food, ingredients: ingredients} );
@@ -37,57 +40,49 @@ app.post("/newuser", function(req, res) {
 	});
 });
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
 
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook',
-  	 { successRedirect: '/',
-      failureRedirect: '/login' }
-  )
-);
 
-app.post("/signin/:id", function(req, res) {
-		var username = req.body.username
-		var email = req.body.email
-		User.find({userName: username}, function(err, user) {
 
-		if(user[0].email === email) {
-
-			res.redirect("/profile")
-		}
-		else {
-			console.log('user login failed')
-			res.redirect("/")
-		}
-	});
-})
-
-app.get("/profile", function(req, res) {
-	console.log("hello")
-	console.log(req.session.userid)
-
-	var id = req.session.userid
-	if(id) {
-	User.findById(id, function(err,user) {
-		if (err) {
-			console.log("shits broke yo!")
-	 	  res.redirect("/")
-		}
-		else {
-			console.log(user)
-			res.render('profile', {
-        "title" : "User profile",
-        "profile" : user
-      });
-		}
-	});
-	}
-	else {
-	res.redirect("/")
-	};
+app.get("/profile", function(req, res, user) {
+		 passport.authenticate('facebook',
+	  	 { successRedirect: '/profile',
+      failureRedirect: '/' })
+	
+	console.log("At the profile page!")
+	console.log(req.user)
+	res.render('profile', {
+		"title" : "User profile",
+		"profile" : req.user[0]
+	})
+	// if(id) {
+	// User.findById(id, function(err,user) {
+	// 	if (err) {
+	// 		console.log("shits broke yo!")
+	//  	  // res.redirect("/")
+	//  	  res.render('profile')
+	// 	}
+	// 	else {
+	// 		console.log(user)
+	// 		res.render('profile', {
+ //        "title" : "User profile",
+ //        "profile" : user
+ //      });
+	// 	}
+	// });
+	// }
+	// else {
+	// // res.redirect("/")
+	// };
 });
 
-app.post("/edit/:id")
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback', 
+  passport.authenticate('facebook',
+  	 { successRedirect: '/profile',
+      failureRedirect: '/' }
+  )
+);
 
 }
 

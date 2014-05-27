@@ -8,13 +8,24 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var session = require('cookie-session')
 
+//faceBook Oauth begin
+var passport = require('passport')
+var util = require('util')
+var FacebookStrategy = require('passport-facebook').Strategy;
+//facebook Oauth end
+
+//FB KEYS
+var FACEBOOK_APP_ID = "249952498528444"
+var FACEBOOK_APP_SECRET = "d2e5aca9dfa6b2489d016e45068b5d3a";
+
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var messageBoard = require('./routes/messageboard')
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/petsnstuff');
-var User = require("./models/user");
+var User = require("./models/user")["User"];
 
 var app = express();
 
@@ -32,8 +43,93 @@ app.use(session({keys: ["asdf"]}))
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+  // Initialize Passport!  Also use passport.session() middleware, to support
+  // persistent login sessions (recommended).
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+//
+//Facebook OAUTH Begin
+//
+
+// Passport session setup.
+//   To support persistent login sessions, Passport needs to be able to
+//   serialize users into and deserialize users out of the session.  Typically,
+//   this will be as simple as storing the user ID when serializing, and finding
+//   the user by ID when deserializing.  However, since this example does not
+//   have a database of user records, the complete Facebook profile is serialized
+//   and deserialized.
+passport.serializeUser(function(user, done) {
+
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+
+// Use the FacebookStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, an accessToken, refreshToken, and Facebook
+//   profile), and invoke a callback with a user object.
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: "http://localhost:3000/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    // asynchronous verification, for effect...
+    process.nextTick(function (req, res) {
+
+      User.find({ fbId: profile.id }, function(err, user){
+                console.log("The user is below v1")
+
+                if (user.length > 0) {
+                  return done(null, user);
+                  
+                  console.log("WooHOOO!!!")
+                }
+                else {
+                  console.log("No user found creating one")
+                  user = new User({
+                    userName: profile.displayName,
+                    fbId: profile.id
+                  })
+                  user.save(function(err, user){
+                    console.log("User is below")
+                    console.log(user)
+                    if(err){
+                      console.log("Shits broke YO!")
+                    }
+                    else {
+                      req.session.fbid = user.fbId
+                      console.log("Users id is" + user._id)
+                    }
+                  })
+                }
+
+      });
+    
+    })
+}
+));
+      
+      // To keep the example simple, the user's Facebook profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the Facebook account with a user record in your database,
+      // and return that user instead.
+      
+//       return done(null, profile);
+//     });
+//   }
+// ));
+
 // app.use('/', routes);
 app.use('/users', users);
+
+
 
 require("./routes/cats")(app);
 require("./routes/messageboard")(app);

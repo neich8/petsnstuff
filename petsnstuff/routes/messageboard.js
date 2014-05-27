@@ -73,7 +73,7 @@ module.exports = function(app) {
 		}
 		Post.findOneAndUpdate({_id: id}, newPost,function(err, post){
 			if (err) {
-				console.log("Shits broke")
+				console.log("Cannot find post")
 			}
 			else {
 				console.log("Updated")

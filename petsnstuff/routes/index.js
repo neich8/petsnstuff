@@ -1,49 +1,60 @@
-// var express = require('express');
-// var router = express.Router();
+var User = require("../models/user")["User"];
+var Nutrition = require("../models/nutrition");
+var Ingredient = require("../models/ingredient")
 
-// /* GET home page. */
-// router.get('/', function(req, res) {
-//   res.render('index', { title: "Pets 'n Stuff" });
-// });
+var passport = require('passport')
+module.exports = function(app){
 
-// router.post("/newuser", function(req, res) {
-// 	var db = req.db;
+app.get('/', function(req, res) {
+	 passport.authenticate('facebook',
+	  	 { successRedirect: '/profile',
+      failureRedirect: '/' })
+	Nutrition.find({ Brand: "Alpo Dog Food (Dry)"}).select('-_id').exec(function(err, food) {
+		Ingredient.find({}, function(err, ingredients) {
+			res.render('index', { title: "Pets 'n Stuff", foods: food, ingredients: ingredients} );
+		});
+	});
+});
 
-// 	var userName =  req.body.username;
-// 	var email = req.body.email;
+app.post('/brands/:brand_name', function(req, res) {
+	Nutrition.find({ Brand: req.params.brand_name}, function(err, food) {
+		Ingredient.findOne({ Brand: req.params.brand_name}, function(err, ingredient) {
+				res.send({foods: food, ingredient:ingredient});
+		});
+	});
+});
 
-// 	var collection = db.get('petsnstuff')
-
-// 	collection.insert({
-// 		"username" :userName,
-// 		"email" : email
-// 	}, function(err, doc) {
-// 		if(err) {
-// 			res.send("We didnt save your info")
-// 		}
-// 		else {
-// 			// res.location("profile");
-// 			res.redirect("profile");
-// 		}
-// 	});
-// });
-
-// router.post("/signin", function(req, res) {
-
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 
-// })
 
-// router.get("/profile", function(req, res) {
-// 	    var db = req.db;
-//     var collection = db.get('petsnstuff');
-//     collection.find({},{},function(e,docs){
-//     	console.log(docs)
-//         res.render('profile', {
-//             "profile" : docs
-//         });
-//     });
-// })
+app.get("/profile", function(req, res, user) {
+		 passport.authenticate('facebook',
+	  	 { successRedirect: '/profile',
+      failureRedirect: '/' })
+	if(req.user) {
+			res.render('profile', {
+        "title" : "User profile",
+        "profile" : user,
+        "pets" : user.pets.reverse()
+      });
+		}
+	}
+		res.redirect("/")
 
+});
 
-// module.exports = router;
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback', 
+  passport.authenticate('facebook',
+  	 { successRedirect: '/profile',
+      failureRedirect: '/' }
+  )
+);
+
+}
+

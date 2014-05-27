@@ -8,27 +8,32 @@
     <div id="content">
     <!-- Begin Guido Experiment -->
       <div id="dialog" title="Pet Information">
+<<<<<<< HEAD
         <form action="/create/<%= profile._id %>"  method="post">
+=======
+        <form id="pet_submission">
+>>>>>>> bf7b09426e9202f4160a84c3ff99761a99ad8917
           <fieldset class="ui-helper-reset">
             <label for="tab_title">Name</label>
-            <input type="text" name="name" id="tab_title" value="" class="ui-widget-content ui-corner-all"><br>
+            <input type="text" name="name" id="tab_title" class="ui-widget-content ui-corner-all"><br>
             <label for="tab_content">Age&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <label for="tab_content">Approx. Weight</label><br>
-            <input type="text" name="age" id="tab_title" value="" class="ui-widget-content ui-corner-all" size="4">
-            <input type="text" name="weight" id="tab_title" value="" class="ui-widget-content ui-corner-all" size="4"><br><br>
+            <input type="text" name="age" id="tab_title" class="ui-widget-content ui-corner-all" size="4">
+            <input type="text" name="weight" id="tab_title" class="ui-widget-content ui-corner-all" size="4"><br><br>
             <label for="tab_title">License Number</label>
-            <input type="text" name="licensenumber" id="tab_title" value="" class="ui-widget-content ui-corner-all"><br>
+            <input type="text" name="licensenumber" id="tab_title" class="ui-widget-content ui-corner-all"><br>
 
             <label for="tab_title">Breed</label><br>
-            <input type="text" name="breed" id="tab_title" value="" class="ui-widget-content ui-corner-all">
+            <input type="text" name="type" id="tab_title" class="ui-widget-content ui-corner-all">
 
             <label for="tab_title">Color/Markings</label><br>
-            <input type="text" name="markings" id="tab_title" value="" class="ui-widget-content ui-corner-all">
+            <input type="text" name="markings" id="tab_title" class="ui-widget-content ui-corner-all">
 
             <p>Immunizations:</p>
 
+            <input type="text" name="shotName" id="tab_title" value="" class="ui-widget-content ui-corner-all">
             <label for="tab_title">&nbsp;&nbsp;&nbsp; Date Administered:</label><br>
-            <input type="checkbox" name="parvovirus" id="tab_title" value="" class="ui-widget-content ui-corner-all">
+            <input type="text" name="date" id="tab_title" value="" class="ui-widget-content ui-corner-all">
           </fieldset>
         </form>
       </div>
@@ -38,13 +43,27 @@
           <% } %>
         <div id="tabs">
           <ul>
-            <li><a href="#tabs-1">Add your pet here!</a> <!-- <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span> --></li>
+            <% for (var i = 0; i < pets.length; i++ ) { %>
+              <li><a href="#tabs-<%= i+2 %>"><%= pets[i].name %></a></li>
+            <% } %>
+            <li><a href="#tabs-1">Add New Pet</a></li>
           </ul>
-        <div id="tabs-1">
-          <p>Hello please add a pet(s) to your profile.  If this breaks your SOL!</p>
+        <% for (var i = 0; i < pets.length; i++ ) { %>
+          <div id="tabs-<%= (i+2) %>">
+            <p>Name: <%= pets[i].name %></p>
+            <p>Age: <%= pets[i].age %></p>
+            <p>Weight: <%= pets[i].weight %></p>
+            <p>License Number: <%= pets[i].licensenumber %></p>
+            <p>Breed: <%= pets[i].breed %></p>
+            <p>Markings: <%= pets[i].markings %></p>
+          </div>
+        <% } %>
+          <div id="tabs-1">
           <button id="add_tab">Add Pet</button>
         </div>
       </div>
     </div>
   </div>
 <% include _html_footer.ejs %>
+
+

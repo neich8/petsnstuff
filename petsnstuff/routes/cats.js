@@ -35,32 +35,16 @@ app.get("/profile", function(req, res, user) {
 		 passport.authenticate('facebook',
 	  	 { successRedirect: '/profile',
       failureRedirect: '/' })
-	if(req.user){
-		res.render('profile', {
-			"title" : "User profile",
-			"profile" : req.user[0]
-		});
+	if(req.user) {
+			res.render('profile', {
+        "title" : "User profile",
+        "profile" : user,
+        "pets" : user.pets.reverse()
+      });
+		}
 	}
 		res.redirect("/")
-	// if(id) {
-	// User.findById(id, function(err,user) {
-	// 	if (err) {
-	// 		console.log("shits broke yo!")
-	//  	  // res.redirect("/")
-	//  	  res.render('profile')
-	// 	}
-	// 	else {
-	// 		console.log(user)
-	// 		res.render('profile', {
- //        "title" : "User profile",
- //        "profile" : user
- //      });
-	// 	}
-	// });
-	// }
-	// else {
-	// // res.redirect("/")
-	// };
+
 });
 
 app.get('/auth/facebook', passport.authenticate('facebook'));

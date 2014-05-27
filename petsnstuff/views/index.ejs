@@ -3,23 +3,13 @@
  <link rel='stylesheet' href='stylesheets/frontpage.css'/>
  <script src="/scripts/d3.min.js"></script>
  <script src="/scripts/chartlogic.js"></script>
- <a href="/auth/facebook">Login with Facebook</a>
+
     <% include _nav.ejs %>
     <div id="wrapper">
       <div id="content">
         <h1>Welcome to <%= title %></h1>
-        <h5>Signin</h5>
-        <form action="/signin" method='post'>
-          <input type="string" name="username" placeholder="Username"/>
-          <input type="email" name="email" placeholder="Email"/>
-          <input type="submit" placeholder="Signin"/>
-        </form>
-        <h5>Create Account</h5>
-        <form action="/newuser" method='post'>
-          <input type="string" name="username" placeholder="Username"/>
-          <input type="email" name="email" placeholder="Email"/>
-          <input type="submit" placeholder="Create"/>
-        </form>
+        <a href="/auth/facebook">Login With Facebook! its your only choice</a>
+        <a href="/logout">Logout :(</a>
         <br/>
         <br/>
         <div id="chart_container">

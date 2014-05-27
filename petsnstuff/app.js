@@ -129,13 +129,12 @@ passport.use(new FacebookStrategy({
 // app.use('/', routes);
 app.use('/users', users);
 
-<<<<<<< HEAD
 
 
-require("./routes/cats")(app);
-=======
+
+
 require("./routes/index")(app);
->>>>>>> bf7b09426e9202f4160a84c3ff99761a99ad8917
+
 require("./routes/messageboard")(app);
 require("./routes/pets")(app);
 

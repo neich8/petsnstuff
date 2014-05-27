@@ -42,10 +42,8 @@ app.get("/profile", function(req, res, user) {
         "pets" : user.pets.reverse()
       });
 		}
-	}
 		res.redirect("/")
-
-});
+	});
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 

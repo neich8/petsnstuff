@@ -24,22 +24,10 @@ app.post('/brands/:brand_name', function(req, res) {
 	});
 });
 
-app.post("/newuser", function(req, res) {
-	var user = new User({
-		userName: req.body.username,
-		email: req.body.email});
-		user.save(function (err, user) {
-	  if (err) {
-	 	  console.log('meow');
-		}
-		else {
-			req.session.userid = user._id
-			console.log(req.session.userid)
-			res.redirect("/profile");
-		}
-	});
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
 });
-
 
 
 
@@ -47,13 +35,13 @@ app.get("/profile", function(req, res, user) {
 		 passport.authenticate('facebook',
 	  	 { successRedirect: '/profile',
       failureRedirect: '/' })
-	
-	console.log("At the profile page!")
-	console.log(req.user)
-	res.render('profile', {
-		"title" : "User profile",
-		"profile" : req.user[0]
-	})
+	if(req.user){
+		res.render('profile', {
+			"title" : "User profile",
+			"profile" : req.user[0]
+		});
+	}
+		res.redirect("/")
 	// if(id) {
 	// User.findById(id, function(err,user) {
 	// 	if (err) {

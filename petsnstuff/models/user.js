@@ -23,9 +23,9 @@ var userSchema = new Schema({
   	type: String,
   	required: true
   },
-  email: String,
+  fbId: String,
   pets: [petSchema],
-//was going to add shots here but thinking that is containd in pets array
+//was going to add shots here but thinking that is contained in pets array
 });
 
 module.exports = ({

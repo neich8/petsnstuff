@@ -16,7 +16,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 //FB KEYS
 var FACEBOOK_APP_ID = "249952498528444"
-var FACEBOOK_APP_SECRET = "d2e5aca9dfa6b2489d016e45068b5d3a";
+var FACEBOOK_APP_SECRET = "";
 
 
 var routes = require('./routes/index');
@@ -47,7 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
   // Initialize Passport!  Also use passport.session() middleware, to support
   // persistent login sessions (recommended).
   app.use(passport.initialize());
-  app.use(passport.session());
+  // app.use(passport.session());
 
 //
 //Facebook OAUTH Begin
@@ -60,14 +60,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 //   the user by ID when deserializing.  However, since this example does not
 //   have a database of user records, the complete Facebook profile is serialized
 //   and deserialized.
-passport.serializeUser(function(user, done) {
+// passport.serializeUser(function(user, done) {
 
-  done(null, user);
-});
+//   done(null, user);
+// });
 
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
+// passport.deserializeUser(function(obj, done) {
+//   done(null, obj);
+// });
 
 
 // Use the FacebookStrategy within Passport.
@@ -80,41 +80,13 @@ passport.use(new FacebookStrategy({
     callbackURL: "http://localhost:3000/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
-    process.nextTick(function (req, res) {
-
-      User.find({ fbId: profile.id }, function(err, user){
-                console.log("The user is below v1")
-
-                if (user.length > 0) {
-                  return done(null, user);
-                  
-                  console.log("WooHOOO!!!")
-                }
-                else {
-                  console.log("No user found creating one")
-                  user = new User({
-                    userName: profile.displayName,
-                    fbId: profile.id
-                  })
-                  user.save(function(err, user){
-                    console.log("User is below")
-                    console.log(user)
-                    if(err){
-                      console.log("Shits broke YO!")
-                    }
-                    else {
-                      req.session.fbid = user.fbId
-                      console.log("Users id is" + user._id)
-                    }
-                  })
-                }
-
-      });
-    
-    })
-}
+    process.nextTick(function () {
+      app.set("profile", profile)
+      return done(null, profile);
+    });
+  }
 ));
+
       
       // To keep the example simple, the user's Facebook profile is returned to
       // represent the logged-in user.  In a typical application, you would want

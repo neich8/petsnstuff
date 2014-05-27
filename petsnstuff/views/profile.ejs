@@ -8,11 +8,11 @@
     <div id="content">
     <!-- Begin Guido Experiment -->
       <div id="dialog" title="Pet Information">
-<<<<<<< HEAD
+
         <form action="/create/<%= profile._id %>"  method="post">
-=======
+
         <form id="pet_submission">
->>>>>>> bf7b09426e9202f4160a84c3ff99761a99ad8917
+
           <fieldset class="ui-helper-reset">
             <label for="tab_title">Name</label>
             <input type="text" name="name" id="tab_title" class="ui-widget-content ui-corner-all"><br>
@@ -38,6 +38,7 @@
         </form>
       </div>
         <h1> Hey <%= profile.userName %> Welcome to your pets profile</h1>
+        <% if (profile.pets) { %>
         <% if(profile.pets[0]) { %>
         <h1> Pet: <%= profile.pets[0].name%><h1>
           <% } %>
@@ -58,6 +59,7 @@
             <p>Markings: <%= pets[i].markings %></p>
           </div>
         <% } %>
+      <% } %>
           <div id="tabs-1">
           <button id="add_tab">Add Pet</button>
         </div>

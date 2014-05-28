@@ -6,6 +6,7 @@ var petSchema = new Schema ({
 	name: String,
 	age: Number,
 	shots: String,
+  license: String,
 	weight: Number,
 	type: String,
 	photo: String

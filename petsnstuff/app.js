@@ -4,6 +4,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var multer  = require('multer')
 var MongoStore = require('connect-mongo')(session);
 
 
@@ -42,6 +43,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(methodOverride());
 app.use(cookieParser() );
+app.use(multer());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -80,7 +82,7 @@ passport.use(new FacebookStrategy({
     User.findOne({fbId: profile.id}, function(err, user) {
 
       if (err) {
-       return done(err); 
+       return done(err);
       }
       else if(!user){
         User.create({
@@ -109,10 +111,10 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 // authentication process by attempting to obtain an access token.  If
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
-app.get('/auth/facebook/callback', 
+app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/profile',
                                       failureRedirect: '/' }));
-      
+
 
 
 // app.use('/', routes);

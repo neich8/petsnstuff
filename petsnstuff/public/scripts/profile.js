@@ -6,11 +6,24 @@ $(function() {
     modal: true,
     buttons: {
       Add: function() {
-        var data = ( JSON.stringify( $('#pet_submission').serializeArray() ) );
-        $.post("/create/" + data, function(response){
-          console.log(response.pet)
-          addTab(response.pet);
-        })
+        $.ajax({
+          url: "/create",
+          method: "post",
+          data: {
+            petName: $('#pet_submission').find("#petName").val(),
+            age: $('#pet_submission').find("#age").val(),
+            weight: $('#pet_submission').find("#weight").val(),
+            license: $('#pet_submission').find("#license").val(),
+            breed: $('#pet_submission').find("#breed").val(),
+            markings: $('#pet_submission').find("#markings").val(),
+            shotName: $('#pet_submission').find("#shotName").val(),
+            shotDate: $('#pet_submission').find("#shotDate").val(),
+            photo: "test.png"
+          },
+          success: function(response) {
+            addTab(response.pet);
+          }
+        });
         $( this ).dialog( "close" );
       },
       Cancel: function() {

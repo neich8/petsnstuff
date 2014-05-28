@@ -6,8 +6,6 @@ var passport = require('passport')
 module.exports = function(app){
 
 app.get('/', function(req, res) {
-
-
 	 passport.authenticate('facebook',
 	  	 { successRedirect: '/profile',
       failureRedirect: '/' })
@@ -30,7 +28,6 @@ app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
-
 
 
 app.get("/profile", function(req, res) {

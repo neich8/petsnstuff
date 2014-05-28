@@ -6,7 +6,7 @@ var passport = require('passport')
 module.exports = function(app){
 
 app.get('/', function(req, res) {
-	req.session.user = "Hello"
+
 
 	 passport.authenticate('facebook',
 	  	 { successRedirect: '/profile',
@@ -33,58 +33,20 @@ app.get('/logout', function(req, res){
 
 
 
-app.get("/profile", function(req, res, user) {
-
-		 console.log("makin pets")
-	if(req.user.pets) {
+app.get("/profile", function(req, res) {
+		console.log(req.user)
+	if (req.isAuthenticated()) {
 			res.render('profile', {
         "title" : "User profile",
-        "profile" : user,
-        "pets" : user.pets.reverse()
+        "profile" : req.user,
+        "pets" : req.user.pets.reverse()
       });
-		}
-		if(req.user) {
-			res.render('profile', {
-				"title": "User profile",
-				"profile" : user
-			})
-		}
-		res.redirect("/")
+  }
 	});
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
 
-app.get('/auth/facebook/callback',
-	passport.authenticate('facebook', 
-		{ failureRedirect: '/' },
-		function(req, res) {
-			req.ip
-			var profile = app.get("profile")
-			console.log(profile)
-			User.find({fbId: profile.id}, function(err, user){
-				if(user.length > 0) {
-					console.log("\n\n\n\n\n\n\n\n\n\n\n" + user._id)
-					console.log(req.ip)
-				}
-				else {
-					var usr = new User({
-						userName: profile.name,
-						fbId: profile.id})
-					usr.save(function(err, user){
-						if(err) {
-							console.log("Yo shits broke")
-						}
-						else {
 
-							req.session.user = user._id
-						}
-					});
-				}
-				res.redirect('/');
-			});
-		}
-	)
-);
+
 
 }
 

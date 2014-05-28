@@ -17,7 +17,7 @@ var petSchema = new Schema({
 	shots: [shotSchema],
 	photo: String
 })
-
+// Check to see if we can default pets to an empty array
 var userSchema = new Schema({
 	userName: {
   	type: String,

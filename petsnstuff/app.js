@@ -3,20 +3,23 @@ var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-// var expressSession = require('express-session');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+
+
+
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-var session = require('cookie-session')
+// var session = require('cookie-session')
 
 //faceBook Oauth begin
 var passport = require('passport')
 var util = require('util')
 var FacebookStrategy = require('passport-facebook').Strategy;
 //facebook Oauth end
-
+var config = require("./config")
 //FB KEYS
-var FACEBOOK_APP_ID = "249952498528444"
-var FACEBOOK_APP_SECRET = "";
+
 
 
 var routes = require('./routes/index');
@@ -38,65 +41,79 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(methodOverride());
-app.use(session({keys: ["asdf"]}))
-
+app.use(cookieParser() );
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+    secret: "asdf",
+    store: new MongoStore({
+      db : "petsnstuff",
+    })
+  }));
 
 
   // Initialize Passport!  Also use passport.session() middleware, to support
   // persistent login sessions (recommended).
   app.use(passport.initialize());
-  // app.use(passport.session());
+  app.use(passport.session());
 
-//
-//Facebook OAUTH Begin
-//
+passport.serializeUser(function(user, done) {
+  console.log(user)
+  done(null, user.fbId);
+});
 
-// Passport session setup.
-//   To support persistent login sessions, Passport needs to be able to
-//   serialize users into and deserialize users out of the session.  Typically,
-//   this will be as simple as storing the user ID when serializing, and finding
-//   the user by ID when deserializing.  However, since this example does not
-//   have a database of user records, the complete Facebook profile is serialized
-//   and deserialized.
-// passport.serializeUser(function(user, done) {
+passport.deserializeUser(function(fbId, done) {
 
-//   done(null, user);
-// });
+  User.findOne({fbId: fbId}, function(err, user) {
+    done(err, user);
+  });
+});
 
-// passport.deserializeUser(function(obj, done) {
-//   done(null, obj);
-// });
-
-
-// Use the FacebookStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, and Facebook
-//   profile), and invoke a callback with a user object.
 passport.use(new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
+    clientID: config.FACEBOOK_APP_ID,
+    clientSecret: config.FACEBOOK_APP_SECRET,
     callbackURL: "http://localhost:3000/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    process.nextTick(function () {
-      app.set("profile", profile)
-      return done(null, profile);
+
+    User.findOne({fbId: profile.id}, function(err, user) {
+
+      if (err) {
+       return done(err); 
+      }
+      else if(!user.length){
+        User.create({
+          userName: profile.displayName,
+          fbId: profile.id
+        }, function(err, user){
+          if(err){
+            return done(err);
+          }
+          else {
+            done(null, user);
+          }
+        });
+      }
+      else {
+        done(null, user);
+      }
     });
   }
 ));
 
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+// Facebook will redirect the user to this URL after approval.  Finish the
+// authentication process by attempting to obtain an access token.  If
+// access was granted, the user will be logged in.  Otherwise,
+// authentication has failed.
+app.get('/auth/facebook/callback', 
+  passport.authenticate('facebook', { successRedirect: '/profile',
+                                      failureRedirect: '/' }));
       
-      // To keep the example simple, the user's Facebook profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Facebook account with a user record in your database,
-      // and return that user instead.
-      
-//       return done(null, profile);
-//     });
-//   }
-// ));
+
 
 // app.use('/', routes);
 app.use('/users', users);

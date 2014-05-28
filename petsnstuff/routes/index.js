@@ -13,7 +13,7 @@ app.get('/', function(req, res) {
       failureRedirect: '/' })
 	Nutrition.find({ Brand: "Alpo Dog Food (Dry)"}).select('-_id').exec(function(err, food) {
 		Ingredient.find({}, function(err, ingredients) {
-			res.render('index', { title: "Pets 'n Stuff", foods: food, ingredients: ingredients} );
+			res.render('index', { title: "Pets 'n Stuff", foods: food, ingredients: ingredients, req: req} );
 		});
 	});
 });
@@ -34,13 +34,15 @@ app.get('/logout', function(req, res){
 
 
 app.get("/profile", function(req, res) {
-		console.log(req.user)
+		console.log(req.isAuthenticated())
 	if (req.isAuthenticated()) {
 			res.render('profile', {
         "title" : "User profile",
         "profile" : req.user,
-        "pets" : req.user.pets.reverse()
+        "pets" : req.user.pets.reverse(),
+        req: req
       });
+
   }
 	});
 

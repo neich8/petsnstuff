@@ -82,7 +82,7 @@ passport.use(new FacebookStrategy({
       if (err) {
        return done(err); 
       }
-      else if(!user.length){
+      else if(!user){
         User.create({
           userName: profile.displayName,
           fbId: profile.id

@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var shotSchema = new Schema ({
 	shotName: String,
-	examDate: Date
+	examDate: String
 })
 
 var petSchema = new Schema({

@@ -17,15 +17,15 @@ var petSchema = new Schema({
 	shots: [shotSchema],
 	photo: String
 })
-
+// Check to see if we can default pets to an empty array
 var userSchema = new Schema({
 	userName: {
   	type: String,
   	required: true
   },
-  email: String,
+  fbId: String,
   pets: [petSchema],
-//was going to add shots here but thinking that is containd in pets array
+//was going to add shots here but thinking that is contained in pets array
 });
 
 module.exports = ({

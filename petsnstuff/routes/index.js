@@ -6,6 +6,8 @@ var passport = require('passport')
 module.exports = function(app){
 
 app.get('/', function(req, res) {
+
+
 	 passport.authenticate('facebook',
 	  	 { successRedirect: '/profile',
       failureRedirect: '/' })
@@ -31,28 +33,20 @@ app.get('/logout', function(req, res){
 
 
 
-app.get("/profile", function(req, res, user) {
-		 passport.authenticate('facebook',
-	  	 { successRedirect: '/profile',
-      failureRedirect: '/' })
-	if(req.user) {
+app.get("/profile", function(req, res) {
+		console.log(req.user)
+	if (req.isAuthenticated()) {
 			res.render('profile', {
         "title" : "User profile",
-        "profile" : user,
-        "pets" : user.pets.reverse()
+        "profile" : req.user,
+        "pets" : req.user.pets.reverse()
       });
-		}
-		res.redirect("/")
+  }
 	});
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
 
-app.get('/auth/facebook/callback', 
-  passport.authenticate('facebook',
-  	 { successRedirect: '/profile',
-      failureRedirect: '/' }
-  )
-);
+
+
 
 }
 

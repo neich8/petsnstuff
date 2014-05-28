@@ -18,7 +18,7 @@ $(function() {
             markings: $('#pet_submission').find("#markings").val(),
             shotName: $('#pet_submission').find("#shotName").val(),
             shotDate: $('#pet_submission').find("#shotDate").val(),
-            photo: "test.png"
+            photo: "https://s3.amazonaws.com/pets-n-stuff/pets/burhle"
           },
           success: function(response) {
             addTab(response.pet);

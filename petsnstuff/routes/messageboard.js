@@ -15,7 +15,8 @@ module.exports = function(app) {
 				res.render('messageboard', {
 					'title' : "Message Board",
 					'messageboard' : post,
-					'id' : id
+					'id' : id,
+					req : req
 				})
 			}
 		})

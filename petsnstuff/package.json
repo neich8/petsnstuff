@@ -6,6 +6,7 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "aws-sdk": "^2.0.0-rc.18",
     "body-parser": "~1.0.0",
     "connect-mongo": "^0.4.1",
     "cookie-parser": "~1.0.1",
@@ -21,6 +22,7 @@
     "mongoose": "~3.6.13",
     "monk": "*",
     "morgan": "~1.0.0",
+    "multer": "0.0.7",
     "passport": "^0.2.0",
     "passport-facebook": "^1.0.3",
     "satelize": "^0.1.0",

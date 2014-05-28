@@ -4,6 +4,10 @@ $(function() {
   var dialog = $( "#dialog" ).dialog({
     autoOpen: false,
     modal: true,
+    minWidth: 450,
+    resizable: false,
+    show: { effect: "puff",
+    duration: 500 },
     buttons: {
       Add: function() {
         $.ajax({
@@ -18,7 +22,7 @@ $(function() {
             markings: $('#pet_submission').find("#markings").val(),
             shotName: $('#pet_submission').find("#shotName").val(),
             shotDate: $('#pet_submission').find("#shotDate").val(),
-            photo: "test.png"
+            photo: "https://s3.amazonaws.com/pets-n-stuff/pets/burhle"
           },
           success: function(response) {
             addTab(response.pet);
@@ -37,7 +41,7 @@ $(function() {
 
   // This opens the dialog
   $( "#add_tab" )
-    .button()
+    // .button()
     .click(function() {
     dialog.dialog( "open" );
   });

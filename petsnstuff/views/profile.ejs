@@ -41,17 +41,22 @@
           </ul>
         <% for (var i = 0; i < pets.length; i++ ) { %>
           <div id="tabs-<%= (i+2) %>">
-            <p>Name: <%= pets[i].name %></p>
-            <p>Age: <%= pets[i].age %></p>
-            <p>Weight: <%= pets[i].weight %></p>
-            <p>License Number: <%= pets[i].license %></p>
-            <p>Breed: <%= pets[i].breed %></p>
-            <p>Markings: <%= pets[i].markings %></p>
-            <form id="image_upload" method="post" enctype="multipart/form-data" action="/file-upload/<%= profile.id %>/<%= pets[i].id %>" data="<%= pets.id[i] %>">
-              <input type="file" name="thumbnail">
-              <input type="submit">
-            </form>
-           </div>
+            <div id="pet_content">
+              <p>Name: <%= pets[i].name %></p>
+              <p>Age: <%= pets[i].age %></p>
+              <p>Weight: <%= pets[i].weight %></p>
+              <p>License Number: <%= pets[i].license %></p>
+              <p>Breed: <%= pets[i].breed %></p>
+              <p>Markings: <%= pets[i].markings %></p>
+            </div>
+            <div id="image_box">
+              <img src="<%= pets[i].photo %>"/>
+              <form id="image_upload" method="post" enctype="multipart/form-data" action="/file-upload/<%= profile.id %>/<%= pets[i].id %>" data="<%= pets.id[i] %>">
+                <input type="file" name="thumbnail">
+                <input type="submit">
+              </form>
+            </div>
+          </div>
         <% } %>
           <div id="tabs-1">
           <button id="add_tab">Add Pet</button>

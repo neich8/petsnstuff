@@ -5,12 +5,15 @@ var Shot = require("../models/user")["Shot"];
 module.exports = function(app) {
 
 	app.post('/create/:id', function(req, res) {
+		console.log("Creatin Pets")
 		console.log("Pet is creating")
-		var id = req.params.id
+		console.log(req.user.fbId)
+
 	});
 
 
 	app.post('/create/:data', function(req, res) {
+		
 		var id = req.session.user;
 		var form_data = JSON.parse(req.params.data);
 		var name = form_data[0].value;

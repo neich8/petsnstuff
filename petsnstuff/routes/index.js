@@ -16,6 +16,7 @@ app.get('/', function(req, res) {
 			res.render('index', { title: "Pets 'n Stuff", foods: food, ingredients: ingredients, req: req} );
 		});
 	});
+
 });
 
 app.post('/brands/:brand_name', function(req, res) {
@@ -35,6 +36,7 @@ app.get('/logout', function(req, res){
 
 app.get("/profile", function(req, res) {
 		console.log(req.isAuthenticated())
+		console.log(req.user.fbId)
 	if (req.isAuthenticated()) {
 			res.render('profile', {
         "title" : "User profile",

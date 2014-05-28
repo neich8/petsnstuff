@@ -26,10 +26,23 @@ module.exports = function(app) {
 				console.log("Cannot find pets")
 			}
 			else {
+
+				console.log(users)
+
 				user = users[0]
 				user.pets.push(pet)
 				user.pets[user.pets.length-1].shots.push(shot)
-				user.save(function(err, user) {})
+				user.save(function(err, user) {
+					if(err){
+						console.log(err)
+						console.log("shits broke yo")
+					}
+					else { 
+														console.log("\n\n\n\n\n\n\n\n\\n\n\n\n\n\n\n\n\n")
+						console.log(user.pets)
+										console.log("\n\n\n\n\n\n\n\n\\n\n\n\n\n\n\n\n\n")
+					}
+				})
 				res.send({pet: pet})
 			}
 		})

@@ -25,6 +25,7 @@ var config = require("./config")
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var messageBoard = require('./routes/messageboard')
+var pets = require('./routes/pets')
 
 
 var mongoose = require('mongoose');

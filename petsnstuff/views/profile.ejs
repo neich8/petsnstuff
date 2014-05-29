@@ -31,7 +31,6 @@
           </fieldset>
         </form>
       </div>
-
         <h1><%= profile.userName %>'s Pets Page</h1>
         <div id="tabs">
           <ul>
@@ -56,6 +55,7 @@
                       <div class="info-item"><p>License Number: <%= pets[i].license %></p></div>
                       <div class="info-item"><p>Immunizations: <%= pets[i].shots[0].shotName %></p></div>
                       <div class="info-item"><p>Administered: <%= pets[i].shots[0].examDate %></p></div>
+                      <a href="/pet_edit/<%= pets[i].id %>">Edit Pet Info</a>
                     </div>
                   </div>
                   <div class="image_box">

@@ -40,67 +40,76 @@ module.exports = function(app) {
 						console.log("shits broke yo")
 					}
 
-					else { 
-						res.send({pet: pet})	
+					else {
+						res.send({pet: pet})
 
 					}
 				})
-				
 			}
 		})
 	});
 
 
-	app.get("/edit/:id", function(req, res){
+// 	app.get("/pet_edit/:petid", function(req, res){
+// 		User.find({fbId: req.user.fbId}, function(err, user) {
+// 			if(err) {
+// 				console.log("Cannot find pets")
+// 			}
+// 			else {
+// 				var user = user[0]
+// 				for (var i = 0; i < user.pets.length; i++) {
 
-		User.find({fbId: req.user.fbId}, function(err, users) {
-			if(err) {
-				console.log("Cannot find pets")
-			}
-			else {
-				for (var i = 0; i < user.pets.length; i++) {
-					if (user.pets[i].id === req.body.petid) {
-						res.send({"user" : user.pets[i]})
-					}
-				}
-			}
-	})
-});
+// 					if (user.pets[i].id == req.params.petid) {
+// 						res.render("pet_edit", {"title" : "Edit Pet",
+// 												"pet" : user.pets[i],
+// 												req : req})
+// 					}
+// 				}
+// 			}
+// 		})
+// 	});
 
-	app.post("/edit/:id", function(req, res){
-				var pet = {
-			name: req.body.petName,
-			age: req.body.age,
-			weight: req.body.weight,
-			license: req.body.license,
-			breed: req.body.breed,
-			shots: shot,
-			markings: req.body.markings,
-			photo: req.body.photo
-		}
-		User.find({fbId: req.user.fbId}, function(err, user) {
-			if(err) {
-				console.log("Shits broke yo")
-			}
-			else{
-				for (var i = 0; i < user.pets.length; i++) {
-					if(user[0].pets.id === req.body.petid){
-						user.pets[i].update(pet);
-					}
-				}
-			}
-		})
-});
+// 	app.post("/edit_pet/:petid", function(req, res){
+// 		console.log("Hey Im posting")
+// 		var shot = {
+//       shotName: req.body.shotName,
+//       examDate: req.body.shotDate
+// 		}
 
+// 		var pet = {
+// 			name: req.body.petName,
+// 			age: req.body.age,
+// 			weight: req.body.weight,
+// 			license: req.body.license,
+// 			breed: req.body.breed,
+// 			shots: shot,
+// 			markings: req.body.markings,
+// 			photo: req.body.photo
+// 		}
+// 		console.log("****************HERE**************")
+// 		console.log(pet)
+// 		User.find({fbId: req.user.fbId}, function(err, user) {
+// 			if(err) {
+// 				console.log("Shits broke yo")
+// 			}
+// 			else{
+// 				console.log("User found!")
+// 				var user1 = user[0]
 
-
-
-
-
-
-
+// 				for (var i = 0; i < user1.pets.length; i++) {
+// 					console.log(req.params.petid)
+// 					if(user1.pets[i].id == req.params.petid){
+// 						console.log("pet found!")
+// 						user[0].pets[i].remove()
+// 						user[0].pets[].save()
+// 										res.redirect("/profile")
 
 
+// 					}
+// 				}
+// 			}
+// 		})
+// })
 
 
 	app.post('/delete', function(req, res){

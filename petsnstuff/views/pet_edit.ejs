@@ -1,0 +1,27 @@
+<% include _html_header.ejs %>
+<% include _nav.ejs %>
+  <div id="wrapper">
+    <div id="content">
+      <form action="/edit_pet/<%= pet.id %>" method="post">
+          <span class="tab_title">Name<span class="validation" id="name_validation">  *Required</span></span><br/>
+            <input type="text" data="required" name="petName" id="petName" value="<%= pet.name %>">
+            <span class="tab_title">Age<span class="validation" id="age_validation">  *Required</span></span><br/>
+            <input type="text" data="required" name="age" id="age" value="<%= pet.age %>" size="4">
+            <span class="tab_title">Approx. Weight<span class="validation" id="weight_validation">  *Required</span></span><br/>
+            <input type="text" data="required" name="weight" id="weight" value="<%= pet.weight %>" size="4">
+            <span class="tab_title">License Number</span><br/>
+            <input type="text" name="license" id="license" value="<%= pet.license %>">
+            <span class="tab_title">Breed<span class="validation" id="breed_validation">  *Required</span></span><br/>
+            <input type="text" data="required" name="type" id="breed" value="<%= pet.breed %>">
+            <span class="tab_title">Color/Markings</span><br/>
+            <input type="text" name="markings" id="markings" value="<%= pet.markings %>">
+            <span class="tab_title">Immunizations:</span><br/>
+            <input type="text" name="shotName" id="shotName" value="<%= pet.shotName %>">
+            <span class="tab_title">Date Administered:</span><br/>
+            <input type="text" name="shotDate" id="shotDate" value="<%= pet.shotDate %>"><br/>
+            <button type="submit">Edit</button>
+            <img src="<%= pet.photo %>"/>
+      </form>
+    </div>
+  </div>
+<% include _html_footer.ejs %>

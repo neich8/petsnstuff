@@ -1,11 +1,8 @@
-var User = require("../models/user")
-
+var User = require("../models/user");
 var Nutrition = require("../models/nutrition");
-var Ingredient = require("../models/ingredient")
-
+var Ingredient = require("../models/ingredient");
 var satelize = require('satelize');
-var passport = require('passport')
-
+var passport = require('passport');
 var fs = require('fs');
 var aws = require('aws-sdk');
 aws.config.loadFromPath('././AwsConfig.json');
@@ -64,12 +61,15 @@ module.exports = function(app){
     satelize.satelize({ip: '46.19.37.108'}, function(err, geoData) {
     var obj = JSON.parse(geoData);
     var request = require('request');
-    
+
     request('https://api.forecast.io/forecast/30a281d92fd821b0e1ce3ef138ab59d4/' + obj.longitude + "," + obj.latitude , function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var weather = JSON.parse(response.body)
-        var img = weatherSolver(weather)
-        res.send("https://s3.amazonaws.com/pets-n-stuff/" + img)
+
+        var img = "https://s3.amazonaws.com/pets-n-stuff/" + weatherSolver(weather)
+        res.send({"img" :  img,
+                  "weather" : weather.currently.summary,
+                  "temp" : weather.currently.temperature})
       }
     })
   });

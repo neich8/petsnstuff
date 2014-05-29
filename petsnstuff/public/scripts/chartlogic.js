@@ -179,6 +179,21 @@ function change_analysis(num) {
   var left_foods = $($(".left_foods")[num]).html().split(",")
   var right_foods = $($(".right_foods")[num]).html().split(",")
 
+  switch(num){
+    case 0:
+      $("#analysis_type").html("Guaranteed Analysis")
+      $("#analysis_description").html("Pet food industry standard of displaying minimal levels of crude protein and fat. No analysis is made for carbs, and the protein and fat are listed as crude, rather than digestible sources. The white parts of the chart represent all other raw materials, such as water/moisture weight. The guarunteed analysis can be used as a starting point in understanding the quality of a food, but the dry matter basis represents a better way of breaking down the protein and fat levels in your pet food.")
+      break;
+    case 1:
+      $("#analysis_type").html("Dry Matter Basis")
+      $("#analysis_description").html("Compares foods on a same-moisture basis to equalize the actual weight of the ingredients based only on their dry matter. For example, if a can of dog food displays 10% protein on its guaranteed analysis, but is composed of 75% moisture, its protein level on a dry matter basis is 40%. To get this amount, we take the protein amount listed in the guaranteed analysis (10%) and divide it by the total amount of dry matter (25%), then multiply it by 100. This provides a more clear picture of the actual protein level of the digestible food, and also provides additional information for carbs, which is not part of the standard guaranteed analysis.")
+      break;
+    case 2:
+      $("#analysis_type").html("Calorie Weighted Basis")
+      $("#analysis_description").html("This graph represents the protein, fat, and carb levels on a per calorie basis")
+      break;
+  }
+
   var left_foodData=[
     {label:"Protein", color:"#3366CC", value: left_foods[0] },
     {label:"Fat", color:"#DC3912", value: left_foods[1] },

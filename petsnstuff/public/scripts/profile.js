@@ -11,25 +11,30 @@ $(function() {
     duration: 500 },
     buttons: {
       Add: function() {
-        $.ajax({
-          url: "/create",
-          method: "post",
-          data: {
-            petName: $('#pet_submission').find("#petName").val(),
-            age: $('#pet_submission').find("#age").val(),
-            weight: $('#pet_submission').find("#weight").val(),
-            license: $('#pet_submission').find("#license").val(),
-            breed: $('#pet_submission').find("#breed").val(),
-            markings: $('#pet_submission').find("#markings").val(),
-            shotName: $('#pet_submission').find("#shotName").val(),
-            shotDate: $('#pet_submission').find("#shotDate").val(),
-            photo: "https://s3.amazonaws.com/pets-n-stuff/nyancat.gif"
-          },
-          success: function(response) {
-            addTab(response.pet);
-          }
-        });
-        $( this ).dialog( "close" );
+        if ($('#pet_submission .hidden').length != 4) {
+          alert("Not all required fields filled out")
+        }
+        else {
+          $.ajax({
+            url: "/create",
+            method: "post",
+            data: {
+              petName: $('#pet_submission').find("#petName").val(),
+              age: $('#pet_submission').find("#age").val(),
+              weight: $('#pet_submission').find("#weight").val(),
+              license: $('#pet_submission').find("#license").val(),
+              breed: $('#pet_submission').find("#breed").val(),
+              markings: $('#pet_submission').find("#markings").val(),
+              shotName: $('#pet_submission').find("#shotName").val(),
+              shotDate: $('#pet_submission').find("#shotDate").val(),
+              photo: "https://s3.amazonaws.com/pets-n-stuff/nyancat.gif"
+            },
+            success: function(response) {
+              addTab(response.pet);
+            }
+          });
+          $( this ).dialog( "close" );
+        }
       },
       Cancel: function() {
         $( this ).dialog( "close" );
@@ -84,11 +89,45 @@ $(function() {
       });
     }
   })
+
+  $("input[data=required]").bind("change", function() {
+    checkValidation()
+  })
 });
 
+ function checkValidation() {
+  console.log("HERE")
+        if ($('#petName').val() != "") {
+            $('#name_validation').attr('class', 'hidden');
+        }
+        if ($('#age').val() != "")
+            $('#age_validation').attr('class', 'hidden');
 
-// tabs.delegate( "span.ui-icon-close", "click", function() {
-//       var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
-//       $( "#" + panelId ).remove();
-//       tabs.tabs( "refresh" );
-//     });
+        if ($('#breed').val() != "")
+            $('#breed_validation').attr('class', 'hidden');
+
+        if ($('#weight').val() != "")
+            $('#weight_validation').attr('class', 'hidden');
+
+        // if ($('#ZDticket').val().match(/\b\d{7}\b/))
+        //     $('#validateTicket').css('display', 'none');
+
+        // if ($('#timeHours option:selected').text() != "Hours" && $('#timeMinutes option:selected').text() != "Minutes")
+        //     $('#validateTime').css('display', 'none');
+
+        // if ($('#siteEditor option:selected').text() != "Assignee" ) {
+        //     $('#validateSEName').css('display', 'none');
+        //     var cookie = $('#siteEditor option:selected').text();
+        //     document.cookie = cookie + '; expires=Fri, 3 Aug 2100 20:47:11 UTC; path=/';
+        // }
+
+        // if ($('#WM').is(':checked') || $('#WM1').is(':checked'))
+        //     $('#validateApproval').css('display', 'none');
+
+        // if ($('#validations').children(':visible').length == 0) {
+        //     $('#validations').css('display', 'none');
+        //     $('#generateNote').attr('disabled', false);
+        // }
+    }
+
+

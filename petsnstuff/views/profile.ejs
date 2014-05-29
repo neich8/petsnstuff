@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="/stylesheets/jquery-ui.css">
 <script src="/scripts/jquery-ui-1.10.4.min.js"></script>
 <script src="scripts/profile.js"></script>
+
  <!--  The code below the creates html form when you -->
   <div id="wrapper">
     <div id="content">
@@ -30,6 +31,7 @@
           </fieldset>
         </form>
       </div>
+ 
         <h1><%= profile.userName %>'s Pets Page</h1>
         <div id="tabs">
           <ul>
@@ -56,7 +58,7 @@
                     </div>
                   </div>
                   <div class="image_box">
-                    <img src="<%= pets[i].photo %>"/>
+                    <img id="profile-photo" src="<%= pets[i].photo %>"/>
                     <form id="image_upload" method="post" enctype="multipart/form-data" action="/file-upload/<%= i %>/<%= pets[i].id %>" data="<%= pets.id[i] %>">
                       <input type="file" name="thumbnail">
                       <input type="submit">
@@ -67,6 +69,7 @@
               </div>
               </div>
             <% } %>
+
     </div>
   </div>
 <% include _html_footer.ejs %>

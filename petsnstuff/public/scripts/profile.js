@@ -61,6 +61,7 @@ $(function() {
     $("div#tabs").tabs("refresh")
   }
 
+
   if ($("#active_tab").html() != "") {
     $( "div#tabs").tabs( "option", "active", parseInt( $("#active_tab").html() ) );
   }

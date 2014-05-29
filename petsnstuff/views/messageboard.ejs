@@ -1,6 +1,5 @@
 <% include _html_header.ejs %>
   <% include _nav.ejs %>
-   <script src="/scripts/cat.js"></script>
   <div id="wrapper">
     <div id="content">
       <%if(req.user) { %>
@@ -8,6 +7,7 @@
   		 Title:
       <br><input type="string" name="title"  placeholder="Title"> <br><br>
       Message:<br>
+             <div class="photo"></div>
       <textarea rows="10" cols="30" name="content"></textarea>
       <br><br><input type="submit" name="Post!">
     </form>
@@ -15,8 +15,7 @@
         <h3><a href="/auth/facebook">Sign in<a> to post</h3>
       <% } %>
       <h1>Posts</h1>
-      <ul>
-
+        <ul>
         <% for(var i=0; i<messageboard.length; i++) {%>
 
           <li><%= messageboard[i].title %></li>
@@ -33,5 +32,4 @@
       </ul>
     </div>
   </div>
-<div class="photo">
-</div>
+

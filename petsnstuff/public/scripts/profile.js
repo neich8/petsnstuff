@@ -4,7 +4,8 @@ $(function() {
   var dialog = $( "#dialog" ).dialog({
     autoOpen: false,
     modal: true,
-    minWidth: 450,
+    width: 400,
+    height: 'auto',
     resizable: false,
     show: { effect: "puff",
     duration: 500 },

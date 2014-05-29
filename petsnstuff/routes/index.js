@@ -55,7 +55,7 @@ module.exports = function(app){
         if(err) {
           console.log("Cannot find pets")
         }
-        if (req.files.thumbnail.size > 250000) {
+        if (req.files.thumbnail.size > 1000000) {
           console.log("Error: File is over 25KB")
           res.redirect('/profile')
         }
@@ -125,7 +125,7 @@ module.exports = function(app){
 
               pet.save(function(err, pet) {})
               user.save(function(err, user) {})
-              res.render('/profile')
+              res.redirect('/profile')
 
             }
           }

@@ -85,10 +85,7 @@ module.exports = function(app){
           console.log("Cannot find pets")
         }
         if (req.files.thumbnail.size > 1000000) {
-
-
           console.log("Error: File is over 1MB")
-
           res.redirect('/profile')
         }
         else {

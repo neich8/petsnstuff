@@ -1,6 +1,6 @@
 <% include _html_header.ejs %>
 <% include _nav.ejs %>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="/stylesheets/jquery-ui.css">
 <script src="/scripts/jquery-ui-1.10.4.min.js"></script>
 <script src="scripts/profile.js"></script>
  <!--  The code below the creates html form when you -->
@@ -10,6 +10,7 @@
       <div id="dialog" title="Pet Information">
         <form id="pet_submission">
           <fieldset class="ui-helper-reset">
+
             <span="tab_title">Name</span>
             <input type="text" name="petName" id="petName" class="ui-widget-content ui-corner-all">
             <span="tab_content">Age</span>
@@ -19,6 +20,7 @@
             <span="tab_title">License Number</span>
             <input type="text" name="license" id="license" class="ui-widget-content ui-corner-all">
             <span="tab_title">Breed</span>
+
             <input type="text" name="type" id="breed" class="ui-widget-content ui-corner-all">
             <span="tab_title">Color/Markings</span>
             <input type="text" name="markings" id="markings" class="ui-widget-content ui-corner-all">

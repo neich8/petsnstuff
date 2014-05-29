@@ -11,30 +11,28 @@ $(function() {
     duration: 500 },
     buttons: {
       Add: function() {
-        if ($('#pet_submission .hidden').length != 4) {
-          alert("Not all required fields filled out")
-        }
-        else {
-          $.ajax({
-            url: "/create",
-            method: "post",
-            data: {
-              petName: $('#pet_submission').find("#petName").val(),
-              age: $('#pet_submission').find("#age").val(),
-              weight: $('#pet_submission').find("#weight").val(),
-              license: $('#pet_submission').find("#license").val(),
-              breed: $('#pet_submission').find("#breed").val(),
-              markings: $('#pet_submission').find("#markings").val(),
-              shotName: $('#pet_submission').find("#shotName").val(),
-              shotDate: $('#pet_submission').find("#shotDate").val(),
-              photo: "https://s3.amazonaws.com/pets-n-stuff/nyancat.gif"
-            },
-            success: function(response) {
-              addTab(response.pet);
-            }
-          });
-          $( this ).dialog( "close" );
-        }
+
+        $.ajax({
+          url: "/create",
+          method: "post",
+          data: {
+            petName: $('#pet_submission').find("#petName").val(),
+            age: $('#pet_submission').find("#age").val(),
+            weight: $('#pet_submission').find("#weight").val(),
+            license: $('#pet_submission').find("#license").val(),
+            breed: $('#pet_submission').find("#breed").val(),
+            markings: $('#pet_submission').find("#markings").val(),
+            shotName: $('#pet_submission').find("#shotName").val(),
+            shotDate: $('#pet_submission').find("#shotDate").val(),
+            photo: "https://s3.amazonaws.com/pets-n-stuff/nyancat.gif"
+          },
+          success: function(response) {
+            addTab(response.pet);
+             window.location.href = '/profile';
+          }
+        });
+        $( this ).dialog( "close" );
+
       },
       Cancel: function() {
         $( this ).dialog( "close" );
@@ -61,9 +59,11 @@ $(function() {
 
   function addTab(pet){
     var tab_number = $("#tabs ul").children().length + 1
-    $("#tabs ul").prepend("<li><a href='#tabs-" + tab_number + "'>" + pet.name + "</a></li>")
+    $("#tabs ul").prepend("<li><a href='#tabs-" + tab_number + "'>" + pet.name + "</a><span class='remove' data-pet='"+ pet.id +
+     "' data-tab='"+ tab_number +"'>x</span></li>")
     $("#tabs").append("<div id='tabs-" + tab_number + "'>" + pet.markings + "</div>")
     $("div#tabs").tabs("refresh")
+    $("#tabs ul").load("refresh")
   }
 
 

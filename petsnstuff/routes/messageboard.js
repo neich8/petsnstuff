@@ -3,8 +3,9 @@ module.exports = function(app) {
 
 	app.get('/messageboard', function(req, res){
 		console.log("messageboard")
-		console.log(req.session.userid)
-		id = req.session.userid
+		console.log(req.user.userid)
+		id = req.user.fbId
+		console.log(id)
 		Post.find({}, function(err,post){
 			if (err) {
 				res.redirect('/')
@@ -51,8 +52,7 @@ module.exports = function(app) {
 		var post = new Post({
 			title: req.body.title,
 			post: req.body.content,
-			user: req.session.userid});
-
+			fbId: req.user.fbId});
 		SavePost(post, res)
 	});
 

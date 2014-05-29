@@ -94,45 +94,6 @@ module.exports = function(app){
                 var fileList = getFileList('./' + CODE_PATH);
 
 
-}
-
-
-function weatherSolver(weather) {
-	var temp = parseFloat(weather.currently.temperature)
-	var condition = weather.currently.icon
-	var three = Math.floor(Math.random() * 3) + 1
-	switch(condition) {
-		case "rain":
-		case "hail":
-		case "thunderstorm":
-		case "tornado":
-			var img = "/cat_pics/rain/r" + three
-			break;
-		case "snow":
-		case "sleet":
-			var img = "/cat_pics/snow/s" + three
-			break;
-		case "fog":
-			var img = "/cat_pics/fog/f" + three
-			break;
-	}
-	if(!img) {
-		if(temp > 80 ) {
-			var img = "/cat_pics/hot/h" + Math.floor(Math.random() * 5) + 1
-		}
-		else if(temp < 45) {
-			var img = "/cat_pics/hot/c" + three
-		}
-		else {
-			var img = "/cat_pics/mild/" + three
-		}
-	}
-	return img
-}
-
-
-
-
                 fileList.forEach(function(entry) {
                   uploadFile(CODE_PATH + entry, './' + CODE_PATH + entry);
                 });
@@ -195,5 +156,40 @@ function weatherSolver(weather) {
       })
     console.log(req.files.thumbnail)
   })
+
+
+
 }
 
+function weatherSolver(weather) {
+  var temp = parseFloat(weather.currently.temperature)
+  var condition = weather.currently.icon
+  var three = Math.floor(Math.random() * 3) + 1
+  switch(condition) {
+    case "rain":
+    case "hail":
+    case "thunderstorm":
+    case "tornado":
+      var img = "cat_pics/rain/r" + three + ".jpg"
+      break;
+    case "snow":
+    case "sleet":
+      var img = "cat_pics/snow/s" + three + ".jpg"
+      break;
+    case "fog":
+      var img = "cat_pics/fog/f" + three + ".jpg"
+      break;
+  }
+  if(!img) {
+    if(temp > 80 ) {
+      var img = "cat_pics/hot/h" + (Math.floor(Math.random() * 5) + 1) + ".jpg"
+    }
+    else if(temp < 45) {
+      var img = "/cat_pics/hot/c" + three + ".jpg"
+    }
+    else {
+      var img = "/cat_pics/mild/" + three + ".jpg"
+    }
+  }
+  return img
+}

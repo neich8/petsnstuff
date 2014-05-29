@@ -25,6 +25,7 @@
     "multer": "0.0.7",
     "passport": "^0.2.0",
     "passport-facebook": "^1.0.3",
+    "satelize": "^0.1.0",
     "static-favicon": "~1.0.0"
   }
 }

@@ -6,7 +6,7 @@
  <!--  The code below the creates html form when you -->
   <div id="wrapper">
     <div id="content">
-    <!-- Begin Guido Experiment -->
+
       <div id="dialog" title="Pet Information">
         <form id="pet_submission">
           <fieldset class="ui-helper-reset">
@@ -30,7 +30,7 @@
         </form>
       </div>
         <h1><%= profile.userName %>'s Pets Page</h1>
-
+        <div id="TEST">TEST<%= active_tab %></div>
         <div id="tabs">
           <ul>
             <% for (var i = 0; i < pets.length; i++ ) { %>
@@ -56,9 +56,9 @@
                     <div class="info-item"><p>Administered: <%= pets[i].shots.examDate %></p></div>
                   </div>
                   </div>
-                  <div id="image_box">
+                  <div class="image_box">
                     <img src="<%= pets[i].photo %>"/>
-                    <form id="image_upload" method="post" enctype="multipart/form-data" action="/file-upload/<%= profile.id %>/<%= pets[i].id %>" data="<%= pets.id[i] %>">
+                    <form id="image_upload" method="post" enctype="multipart/form-data" action="/file-upload/tab_<%= i %>/<%= pets[i].id %>" data="<%= pets.id[i] %>">
                       <input type="file" name="thumbnail">
                       <input type="submit">
                     </form>
@@ -66,10 +66,8 @@
                 </div>
                 </div>
               <% } %>
-    <!--       <div id="tabs-1">
-          <button id="add_tab">Add Pet</button>
-        </div> -->
       </div>
+
     </div>
   </div>
 <% include _html_footer.ejs %>

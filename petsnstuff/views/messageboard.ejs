@@ -1,5 +1,6 @@
 <% include _html_header.ejs %>
   <% include _nav.ejs %>
+   <script src="/scripts/cat.js"></script>
   <div id="wrapper">
     <div id="content">
   	<form action="/post" method="post">
@@ -10,15 +11,20 @@
       <br><br><input type="submit" name="Post!">
       <h1>Posts</h1>
       <ul>
+
         <% for(var i=0; i<messageboard.length; i++) {%>
+
           <li><%= messageboard[i].title %></li>
           <li><%= messageboard[i].post %></li>
           <li><form action="/delete/<%= messageboard[i]._id %>" method="post">
+        <% if(id == messageboard[i].fbId) { %>
             <button type="submit">Delete</button>
             </form></li>
-            <li><a href="/edit/<%= messageboard[i]._id %>">Edit DONT FORGET THE IF STATEMENT!!!!</a></li>
+            <li><a href="/edit/<%= messageboard[i]._id %>">Edit</a></li>
+        <% } %>
         <% } %>
       </ul>
     </div>
   </div>
-<% include _html_footer.ejs %>
+<div class="photo">
+</div>

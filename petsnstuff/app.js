@@ -6,8 +6,8 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var multer  = require('multer')
 var MongoStore = require('connect-mongo')(session);
-
-
+//Find IP
+var satelize = require('satelize');
 
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
@@ -26,6 +26,7 @@ var config = require("./config")
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var messageBoard = require('./routes/messageboard')
+
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/petsnstuff');
@@ -51,6 +52,7 @@ app.use(session({
     secret: "asdf",
     store: new MongoStore({
       db : "petsnstuff",
+      url: "mongodb://nodejitsu:31ce0206b0c954bd4d44a3cfec63d949@troup.mongohq.com:10090/nodejitsudb9160065350"
     })
   }));
 
@@ -122,8 +124,6 @@ app.use('/users', users);
 
 
 
-
-
 require("./routes/index")(app);
 
 require("./routes/messageboard")(app);
@@ -135,6 +135,11 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
+
+// / request
+
+
+
 
 /// error handlers
 

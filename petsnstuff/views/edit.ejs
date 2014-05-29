@@ -4,9 +4,11 @@
     <div id="content">
 
     	<form action="/edit/<%= edit.id %>" method="post">
-    		<input type="string" name="title"  value="<%= edit.title%>">
-    		<textarea rows="10" cols="30" name="post"><%= edit.post%></textarea>
-    		<button type="submit">Edit Add if statement!!!!!!!</button>
+    		<p>Title</p>
+    		<input type="string" name="title"  value="<%= edit.title%>"><br><br>
+    		<p>Message</p>
+    		<textarea rows="10" cols="30" name="post"><%= edit.post%></textarea><br><br>
+    		<button type="submit">Edit</button>
       </form>
     </div>
   </div>

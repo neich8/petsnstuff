@@ -1,9 +1,10 @@
 <% include _html_header.ejs %>
 <% include _nav.ejs %>
+<div id="load">
 <link rel="stylesheet" href="/stylesheets/jquery-ui.css">
 <script src="/scripts/jquery-ui-1.10.4.min.js"></script>
 <script src="scripts/profile.js"></script>
-
+</div>
  <!--  The code below the creates html form when you -->
   <div id="wrapper">
     <div id="content">
@@ -43,6 +44,7 @@
         <% for (var i = 0; i < pets.length; i++ ) { %>
           <div id="tabs-<%= (i+2) %>">
             <div id="container">
+
               <div id='cover_container' style="background:url("<%= pets[i].photo %>");">
                   <div id="pet_content">
                     <div id="info-box">
@@ -53,8 +55,8 @@
                       <div class="info-item"><p>Breed: <%= pets[i].breed %></p></div>
                       <div class="info-item"><p>Markings: <%= pets[i].markings %></p></div>
                       <div class="info-item"><p>License Number: <%= pets[i].license %></p></div>
-                      <div class="info-item"><p>Immunizations: <%= pets[i].shots.shotName %></p></div>
-                      <div class="info-item"><p>Administered: <%= pets[i].shots.examDate %></p></div>
+                      <div class="info-item"><p>Immunizations: <%= pets[i].shots[0].shotName %></p></div>
+                      <div class="info-item"><p>Administered: <%= pets[i].shots[0].examDate %></p></div>
                     </div>
                   </div>
                   <div class="image_box">

@@ -1,5 +1,5 @@
 var User = require("../models/user")
-var Pet = require("../models/pets")
+
 var Nutrition = require("../models/nutrition");
 var Ingredient = require("../models/ingredient")
 

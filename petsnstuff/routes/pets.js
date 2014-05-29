@@ -1,9 +1,8 @@
 var User = require("../models/user")
 
-// var Shot = require("../models/shots")
 
 module.exports = function(app) {
-	app.get('/create', function(req, res) {
+	app.post('/create', function(req, res) {
 
 		var shot = {
       shotName: req.body.shotName,
@@ -11,18 +10,18 @@ module.exports = function(app) {
 		}
 
 		var pet = {
-			name: "req.body.petName",
-			age: "req.body.age",
-			weight: "req.body.weight",
-			license: "req.body.license",
-			breed: "req.body.breed",
-			shots: "shot",
-			markings: "req.body.markings",
-			photo: "req.body.photo"
+			name: req.body.petName,
+			age: req.body.age,
+			weight: req.body.weight,
+			license: req.body.license,
+			breed: req.body.breed,
+			shots: shot,
+			markings: req.body.markings,
+			photo: req.body.photo
 		}
 		console.log(req.user.fbId)
 		User.find({fbId: req.user.fbId}, function(err, users) {
-			console.log("FUCK THIS")
+
 			if(err) {
 				console.log("Cannot find pets")
 			}
@@ -40,24 +39,17 @@ module.exports = function(app) {
 						console.log(err)
 						console.log("shits broke yo")
 					}
-<<<<<<< HEAD
+
 					else { 
 						res.send({pet: pet})	
-=======
-					else {
-														console.log("\n\n\n\n\n\n\n\n\\n\n\n\n\n\n\n\n\n")
-						console.log(user.pets)
-										console.log("\n\n\n\n\n\n\n\n\\n\n\n\n\n\n\n\n\n")
->>>>>>> b9333af8fc81fb451381dfd6c56fd0d83fc2c99b
+
 					}
 				})
 				
 			}
 		})
 	});
-<<<<<<< HEAD
-};
-=======
+
 
 	app.post('/delete', function(req, res){
 		User.find({fbId: req.user.fbId}, function(err, user) {
@@ -90,4 +82,4 @@ module.exports = function(app) {
 };
 
 
->>>>>>> b9333af8fc81fb451381dfd6c56fd0d83fc2c99b
+

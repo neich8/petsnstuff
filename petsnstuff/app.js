@@ -22,15 +22,14 @@ var config = require("./config")
 //FB KEYS
 
 
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var messageBoard = require('./routes/messageboard')
 
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/petsnstuff');
-var User = require("./models/user")["User"];
+mongoose.connect(config.MONGOOSECONNECT);
+var User = require("./models/user");
 
 var app = express();
 
@@ -56,9 +55,6 @@ app.use(session({
     })
   }));
 
-
-  // Initialize Passport!  Also use passport.session() middleware, to support
-  // persistent login sessions (recommended).
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -77,7 +73,7 @@ passport.deserializeUser(function(fbId, done) {
 passport.use(new FacebookStrategy({
     clientID: config.FACEBOOK_APP_ID,
     clientSecret: config.FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
+    callbackURL: config.CALLBACK
   },
   function(accessToken, refreshToken, profile, done) {
 
@@ -109,10 +105,6 @@ passport.use(new FacebookStrategy({
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
-// Facebook will redirect the user to this URL after approval.  Finish the
-// authentication process by attempting to obtain an access token.  If
-// access was granted, the user will be logged in.  Otherwise,
-// authentication has failed.
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/profile',
                                       failureRedirect: '/' }));

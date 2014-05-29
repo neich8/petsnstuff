@@ -23,7 +23,7 @@ $(function() {
             markings: $('#pet_submission').find("#markings").val(),
             shotName: $('#pet_submission').find("#shotName").val(),
             shotDate: $('#pet_submission').find("#shotDate").val(),
-            photo: "https://s3.amazonaws.com/pets-n-stuff/pets/burhle"
+            photo: "https://s3.amazonaws.com/pets-n-stuff/nyancat.gif"
           },
           success: function(response) {
             addTab(response.pet);

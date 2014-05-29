@@ -1,11 +1,9 @@
-var User = require("../models/user")["User"];
+var User = require("../models/user")
+var Pet = require("../models/pets")
 var Nutrition = require("../models/nutrition");
 var Ingredient = require("../models/ingredient")
 
 var satelize = require('satelize');
-
-var satelize = require('satelize');
-
 var passport = require('passport')
 
 var fs = require('fs');
@@ -50,6 +48,7 @@ module.exports = function(app){
     }
   		console.log(req.isAuthenticated())
   	if (req.isAuthenticated()) {
+      console.log(req.user.pets)
   			res.render('profile', {
           "title" : "User profile",
           "profile" : req.user,

@@ -54,10 +54,13 @@ module.exports = function(app) {
 
 	app.get("/edit/:id", function(req,res) {
 		var id = req.params.id
-		Post.findById(id, function(err, post){
-			console.log(post)
+
+		Post.findById(id, function(err, edit){
+			console.log(edit)
 			res.render('edit', {
-				'edit' : post
+				'edit' : edit,
+				"title" : "Edit message",
+				'req' : req
 			})
 		})
 	});

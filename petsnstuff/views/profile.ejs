@@ -7,11 +7,10 @@
  <!--  The code below the creates html form when you -->
   <div id="wrapper">
     <div id="content">
-
+      <span class="hidden" id="active_tab"><%= active_tab %></span>
       <div id="dialog" title="Pet Information">
         <form id="pet_submission">
           <fieldset class="ui-helper-reset">
-
             <span="tab_title">Name</span>
             <input type="text" name="petName" id="petName" class="ui-widget-content ui-corner-all">
             <span="tab_content">Age</span>
@@ -37,7 +36,7 @@
         <div id="tabs">
           <ul>
             <% for (var i = 0; i < pets.length; i++ ) { %>
-              <li><a href="#tabs-<%= i+2 %>"><%= pets[i].name %></a></li>
+              <li id="tab_<%= i %>_header"><a href="#tabs-<%= i+2 %>"><%= pets[i].name %></a><span class="remove" data-pet="<%= pets[i].id %>" data-tab="<%= i %>">x</span></li>
             <% } %>
             <li><a id="add_tab" href="#tabs-1">+</a></li>
           </ul>
@@ -47,30 +46,30 @@
               <div id='cover_container' style="background:url("<%= pets[i].photo %>");">
                   <div id="pet_content">
                     <div id="info-box">
-                    <div id="info-name"><h2><%= pets[i].name %>'s profile</h2></div>
-
-                    <div class="info-item">Name: <%= pets[i].name %></div>
-                    <div class="info-item"><p>Age: <%= pets[i].age %></p></div>
-                    <div class="info-item"><p>Weight: <%= pets[i].weight %></p></div>
-                    <div class="info-item"><p>Breed: <%= pets[i].breed %></p></div>
-                    <div class="info-item"><p>Markings: <%= pets[i].markings %></p></div>
-                    <div class="info-item"><p>License Number: <%= pets[i].license %></p></div>
-                   <div class="info-item"> <p>Immunizations: <%= pets[i].shots.shotName %></p></div>
-                    <div class="info-item"><p>Administered: <%= pets[i].shots.examDate %></p></div>
-                  </div>
+                      <div id="info-name"><h2><%= pets[i].name %>'s profile</h2></div>
+                      <div class="info-item">Name: <%= pets[i].name %></div>
+                      <div class="info-item"><p>Age: <%= pets[i].age %></p></div>
+                      <div class="info-item"><p>Weight: <%= pets[i].weight %></p></div>
+                      <div class="info-item"><p>Breed: <%= pets[i].breed %></p></div>
+                      <div class="info-item"><p>Markings: <%= pets[i].markings %></p></div>
+                      <div class="info-item"><p>License Number: <%= pets[i].license %></p></div>
+                      <div class="info-item"><p>Immunizations: <%= pets[i].shots.shotName %></p></div>
+                      <div class="info-item"><p>Administered: <%= pets[i].shots.examDate %></p></div>
+                    </div>
                   </div>
                   <div class="image_box">
                     <img id="profile-photo" src="<%= pets[i].photo %>"/>
-                    <form id="image_upload" method="post" enctype="multipart/form-data" action="/file-upload/tab_<%= i %>/<%= pets[i].id %>" data="<%= pets.id[i] %>">
+                    <form id="image_upload" method="post" enctype="multipart/form-data" action="/file-upload/<%= i %>/<%= pets[i].id %>" data="<%= pets.id[i] %>">
                       <input type="file" name="thumbnail">
                       <input type="submit">
                     </form>
                   </div>
                 </div>
                 </div>
+              </div>
+              </div>
+            <% } %>
 
-      </div>
-              <% } %>
     </div>
   </div>
 <% include _html_footer.ejs %>

@@ -23,7 +23,7 @@ $(function() {
             markings: $('#pet_submission').find("#markings").val(),
             shotName: $('#pet_submission').find("#shotName").val(),
             shotDate: $('#pet_submission').find("#shotDate").val(),
-            photo: "https://s3.amazonaws.com/pets-n-stuff/pets/burhle"
+            photo: "https://s3.amazonaws.com/pets-n-stuff/nyancat.gif"
           },
           success: function(response) {
             addTab(response.pet);
@@ -61,5 +61,34 @@ $(function() {
     $("div#tabs").tabs("refresh")
   }
 
-  $("#profile-image").css("max-height", 100)
+
+  if ($("#active_tab").html() != "") {
+    $( "div#tabs").tabs( "option", "active", parseInt( $("#active_tab").html() ) );
+  }
+
+  $(".remove").click(function(){
+    var check = confirm("Really delete this pet profile?");
+    if (check != false) {
+      var id = $(this).attr("data-tab")
+      $.ajax({
+        url: "/delete",
+        method: "post",
+        data: {
+          petid: $(this).attr("data-pet"),
+        },
+        success: function(response) {
+          $( $("#tabs-" + id) ).remove().attr( "aria-controls" );
+          $( $("#tab_" + id + "_header") ).remove();
+          $("div#tabs").tabs("refresh")
+        }
+      });
+    }
+  })
 });
+
+
+// tabs.delegate( "span.ui-icon-close", "click", function() {
+//       var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+//       $( "#" + panelId ).remove();
+//       tabs.tabs( "refresh" );
+//     });

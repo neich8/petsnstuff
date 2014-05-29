@@ -2,6 +2,7 @@
   <% include _nav.ejs %>
   <div id="wrapper">
     <div id="content">
+      <%if(req.user) { %>
   	<form action="/post" method="post">
   		 Title:
       <br><input type="string" name="title"  placeholder="Title"> <br><br>
@@ -9,6 +10,10 @@
              <div class="photo"></div>
       <textarea rows="10" cols="30" name="content"></textarea>
       <br><br><input type="submit" name="Post!">
+    </form>
+      <% } else {%>
+        <h3><a href="/auth/facebook">Sign in<a> to post</h3>
+      <% } %>
       <h1>Posts</h1>
         <ul>
         <% for(var i=0; i<messageboard.length; i++) {%>
@@ -16,11 +21,13 @@
           <li><%= messageboard[i].title %></li>
           <li><%= messageboard[i].post %></li>
           <li><form action="/delete/<%= messageboard[i]._id %>" method="post">
-        <% if(id == messageboard[i].fbId) { %>
+          <% if (req.user) { %>
+            <% if(req.user.fbId == messageboard[i].fbId) { %>
             <button type="submit">Delete</button>
             </form></li>
             <li><a href="/edit/<%= messageboard[i]._id %>">Edit</a></li>
-        <% } %>
+            <% } %>
+          <% } %>
         <% } %>
       </ul>
     </div>

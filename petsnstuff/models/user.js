@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 
+
 var Schema = mongoose.Schema;
 
 var shotSchema = new Schema ({
@@ -7,8 +8,12 @@ var shotSchema = new Schema ({
 	examDate: String
 })
 
+
 var petSchema = new Schema({
-	name: String,
+	name: {
+  	type: String,
+  	required: true
+  },
 	age: Number,
 	weight: Number,
 	license: String,
@@ -17,20 +22,20 @@ var petSchema = new Schema({
 	shots: [shotSchema],
 	photo: String
 })
+
 // Check to see if we can default pets to an empty array
 var userSchema = new Schema({
 	userName: {
   	type: String,
   	required: true
   },
-  fbId: String,
-  pets: [petSchema],
+  fbId: {
+  	type: String,
+  	required: true
+  },
+  pets: [petSchema]
 //was going to add shots here but thinking that is contained in pets array
 });
 
-module.exports = ({
-	Shot: mongoose.model('Shot', shotSchema),
-	Pet: mongoose.model('Pet', petSchema),
-	User: mongoose.model('User', userSchema)
-})
+module.exports = mongoose.model('User', userSchema)
 // module.exports = mongoose.model('User', userSchema);

@@ -4,6 +4,11 @@ $(function() {
   var dialog = $( "#dialog" ).dialog({
     autoOpen: false,
     modal: true,
+    width: 400,
+    height: 'auto',
+    resizable: false,
+    show: { effect: "puff",
+    duration: 500 },
     buttons: {
       Add: function() {
         $.ajax({
@@ -37,7 +42,7 @@ $(function() {
 
   // This opens the dialog
   $( "#add_tab" )
-    .button()
+    // .button()
     .click(function() {
     dialog.dialog( "open" );
   });

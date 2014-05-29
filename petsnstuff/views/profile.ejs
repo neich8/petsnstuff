@@ -6,62 +6,70 @@
  <!--  The code below the creates html form when you -->
   <div id="wrapper">
     <div id="content">
-    <!-- Begin Guido Experiment -->
+
       <div id="dialog" title="Pet Information">
         <form id="pet_submission">
           <fieldset class="ui-helper-reset">
-            <label for="tab_title">NAME</label>
-            <input type="text" name="petName" id="petName" class="ui-widget-content ui-corner-all"><br>
-            <label for="tab_content">Age</label>
-            <input type="text" name="age" id="age" class="ui-widget-content ui-corner-all" size="4"><br>
-            <label for="tab_content">Approx. Weight</label>
-            <input type="text" name="weight" id="weight" class="ui-widget-content ui-corner-all" size="4"><br>
-            <label for="tab_title">License Number</label>
-            <input type="text" name="license" id="license" class="ui-widget-content ui-corner-all"><br>
-            <label for="tab_title">Breed</label>
+
+            <span="tab_title">Name</span>
+            <input type="text" name="petName" id="petName" class="ui-widget-content ui-corner-all">
+            <span="tab_content">Age</span>
+            <input type="text" name="age" id="age" class="ui-widget-content ui-corner-all" size="4">
+            <span="tab_content">Approx. Weight</span>
+            <input type="text" name="weight" id="weight" class="ui-widget-content ui-corner-all" size="4">
+            <span="tab_title">License Number</span>
+            <input type="text" name="license" id="license" class="ui-widget-content ui-corner-all">
+            <span="tab_title">Breed</span>
+
             <input type="text" name="type" id="breed" class="ui-widget-content ui-corner-all">
-            <br>
-            <label for="tab_title">Color/Markings</label>
-            <input type="text" name="markings" id="markings" class="ui-widget-content ui-corner-all"><br>
-            <label for="tab_title">Immunizations:</label>
-            <input type="text" name="shotName" id="shotName" class="ui-widget-content ui-corner-all"><br>
-            <label for="tab_title">Date Administered:</label>
+            <span="tab_title">Color/Markings</span>
+            <input type="text" name="markings" id="markings" class="ui-widget-content ui-corner-all">
+            <span="tab_title">Immunizations:</span>
+            <input type="text" name="shotName" id="shotName" class="ui-widget-content ui-corner-all">
+            <span="tab_title">Date Administered:</span>
             <input type="text" name="shotDate" id="shotDate" class="ui-widget-content ui-corner-all">
           </fieldset>
         </form>
       </div>
-        <h1> Hey <%= profile.userName %> Welcome to your pets profile</h1>
-
+        <h1><%= profile.userName %>'s Pets Page</h1>
+        <div id="TEST">TEST<%= active_tab %></div>
         <div id="tabs">
           <ul>
             <% for (var i = 0; i < pets.length; i++ ) { %>
               <li><a href="#tabs-<%= i+2 %>"><%= pets[i].name %></a></li>
             <% } %>
-            <li><a href="#tabs-1">Add New Pet</a></li>
+            <li><a id="add_tab" href="#tabs-1">+</a></li>
           </ul>
         <% for (var i = 0; i < pets.length; i++ ) { %>
           <div id="tabs-<%= (i+2) %>">
-            <div id="pet_content">
-              <p>Name: <%= pets[i].name %></p>
-              <p>Age: <%= pets[i].age %></p>
-              <p>Weight: <%= pets[i].weight %></p>
-              <p>License Number: <%= pets[i].license %></p>
-              <p>Breed: <%= pets[i].breed %></p>
-              <p>Markings: <%= pets[i].markings %></p>
-            </div>
-            <div id="image_box">
-              <img src="<%= pets[i].photo %>"/>
-              <form id="image_upload" method="post" enctype="multipart/form-data" action="/file-upload/<%= profile.id %>/<%= pets[i].id %>" data="<%= pets.id[i] %>">
-                <input type="file" name="thumbnail">
-                <input type="submit">
-              </form>
-            </div>
-          </div>
-        <% } %>
-          <div id="tabs-1">
-          <button id="add_tab">Add Pet</button>
-        </div>
+            <div id="container">
+              <div id='cover_container' style="background:url("<%= pets[i].photo %>");">
+                  <div id="pet_content">
+                    <div id="info-box">
+                    <div id="info-name"><h2><%= pets[i].name %>'s profile</h2></div>
+
+                    <div class="info-item">Name: <%= pets[i].name %></div>
+                    <div class="info-item"><p>Age: <%= pets[i].age %></p></div>
+                    <div class="info-item"><p>Weight: <%= pets[i].weight %></p></div>
+                    <div class="info-item"><p>Breed: <%= pets[i].breed %></p></div>
+                    <div class="info-item"><p>Markings: <%= pets[i].markings %></p></div>
+                    <div class="info-item"><p>License Number: <%= pets[i].license %></p></div>
+                   <div class="info-item"> <p>Immunizations: <%= pets[i].shots.shotName %></p></div>
+                    <div class="info-item"><p>Administered: <%= pets[i].shots.examDate %></p></div>
+                  </div>
+                  </div>
+                  <div class="image_box">
+                    <img src="<%= pets[i].photo %>"/>
+                    <form id="image_upload" method="post" enctype="multipart/form-data" action="/file-upload/tab_<%= i %>/<%= pets[i].id %>" data="<%= pets.id[i] %>">
+                      <input type="file" name="thumbnail">
+                      <input type="submit">
+                    </form>
+                  </div>
+                </div>
+                </div>
+              <% } %>
       </div>
+
     </div>
   </div>
 <% include _html_footer.ejs %>

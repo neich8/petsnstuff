@@ -37,7 +37,7 @@ module.exports = function(app) {
 						console.log(err)
 						console.log("shits broke yo")
 					}
-					else { 
+					else {
 														console.log("\n\n\n\n\n\n\n\n\\n\n\n\n\n\n\n\n\n")
 						console.log(user.pets)
 										console.log("\n\n\n\n\n\n\n\n\\n\n\n\n\n\n\n\n\n")
@@ -47,4 +47,35 @@ module.exports = function(app) {
 			}
 		})
 	});
+
+	app.post('/delete', function(req, res){
+		User.find({fbId: req.user.fbId}, function(err, user) {
+			if(err) {
+				console.log("Cannot find pets")
+			}
+			else {
+				user = user[0]
+				for (var i = 0; i < user.pets.length; i++) {
+					if (user.pets[i].id === req.body.petid) {
+						user.pets[i].remove( function ( err, pet ){
+				 			if(err) {
+				 				console.log("its not deleted")
+				 			}
+				 			else {
+				 				user.save( function(err, user){
+				 					if(err){
+				 						console.log(err)
+				 					}
+				 					res.send("Success")
+				 				})
+
+				 			}
+				 		})
+				 	}
+				}
+			}
+		})
+	});
 };
+
+

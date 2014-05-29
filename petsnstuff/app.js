@@ -50,10 +50,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
     secret: "asdf",
-    store: new MongoStore({
-      db : "petsnstuff",
-      url: "mongodb://nodejitsu:31ce0206b0c954bd4d44a3cfec63d949@troup.mongohq.com:10090/nodejitsudb9160065350"
-    })
+    // store: new MongoStore({
+    //   db : "petsnstuff",
+    //   url: "mongodb://nodejitsu:31ce0206b0c954bd4d44a3cfec63d949@troup.mongohq.com:10090/nodejitsudb9160065350"
+    // })
   }));
 
 

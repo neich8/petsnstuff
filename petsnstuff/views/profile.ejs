@@ -6,26 +6,25 @@
  <!--  The code below the creates html form when you -->
   <div id="wrapper">
     <div id="content">
-    <!-- Begin Guido Experiment -->
+
       <div id="dialog" title="Pet Information">
         <form id="pet_submission">
           <fieldset class="ui-helper-reset">
-            <label for="tab_title">Name</label>
-            <input type="text" name="petName" id="petName" class="ui-widget-content ui-corner-all"><br>
-            <label for="tab_content">Age</label>
-            <input type="text" name="age" id="age" class="ui-widget-content ui-corner-all" size="4"><br>
-            <label for="tab_content">Approx. Weight</label>
-            <input type="text" name="weight" id="weight" class="ui-widget-content ui-corner-all" size="4"><br>
-            <label for="tab_title">License Number</label>
-            <input type="text" name="license" id="license" class="ui-widget-content ui-corner-all"><br>
-            <label for="tab_title">Breed</label>
+            <span="tab_title">Name</span>
+            <input type="text" name="petName" id="petName" class="ui-widget-content ui-corner-all">
+            <span="tab_content">Age</span>
+            <input type="text" name="age" id="age" class="ui-widget-content ui-corner-all" size="4">
+            <span="tab_content">Approx. Weight</span>
+            <input type="text" name="weight" id="weight" class="ui-widget-content ui-corner-all" size="4">
+            <span="tab_title">License Number</span>
+            <input type="text" name="license" id="license" class="ui-widget-content ui-corner-all">
+            <span="tab_title">Breed</span>
             <input type="text" name="type" id="breed" class="ui-widget-content ui-corner-all">
-            <br>
-            <label for="tab_title">Color/Markings</label>
-            <input type="text" name="markings" id="markings" class="ui-widget-content ui-corner-all"><br>
-            <label for="tab_title">Immunizations:</label>
-            <input type="text" name="shotName" id="shotName" class="ui-widget-content ui-corner-all"><br>
-            <label for="tab_title">Date Administered:</label>
+            <span="tab_title">Color/Markings</span>
+            <input type="text" name="markings" id="markings" class="ui-widget-content ui-corner-all">
+            <span="tab_title">Immunizations:</span>
+            <input type="text" name="shotName" id="shotName" class="ui-widget-content ui-corner-all">
+            <span="tab_title">Date Administered:</span>
             <input type="text" name="shotDate" id="shotDate" class="ui-widget-content ui-corner-all">
           </fieldset>
         </form>
@@ -47,7 +46,7 @@
                     <div id="info-box">
                     <div id="info-name"><h2><%= pets[i].name %>'s profile</h2></div>
 
-                    <div class="info-item"style ="background-image: '/images/icon_4853.svg'">Name: <%= pets[i].name %></div>
+                    <div class="info-item">Name: <%= pets[i].name %></div>
                     <div class="info-item"><p>Age: <%= pets[i].age %></p></div>
                     <div class="info-item"><p>Weight: <%= pets[i].weight %></p></div>
                     <div class="info-item"><p>Breed: <%= pets[i].breed %></p></div>

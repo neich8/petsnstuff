@@ -42,12 +42,19 @@ module.exports = function(app){
 
 
   app.get("/profile", function(req, res) {
+    if ( app.get("active") != undefined ) {
+      var active_tab = app.get("active")
+    }
+    else {
+      var active_tab = ""
+    }
   		console.log(req.isAuthenticated())
   	if (req.isAuthenticated()) {
   			res.render('profile', {
           "title" : "User profile",
           "profile" : req.user,
           "pets" : req.user.pets.reverse(),
+          "active_tab" : active_tab,
           req: req
         });
     }
@@ -71,14 +78,14 @@ module.exports = function(app){
 
 
 
-  app.post('/file-upload/:user_id/:pet_id', function (req, res){
+  app.post('/file-upload/:active_tab/:pet_id', function (req, res){
     User.findOne({fbId: req.user.fbId}, function(err, user) {
-      console.log(req.files.thumbnail.size)
+      app.set("active", req.params.active_tab)
         if(err) {
           console.log("Cannot find pets")
         }
-        if (req.files.thumbnail.size > 250000) {
-          console.log("Error: File is over 25KB")
+        if (req.files.thumbnail.size > 1000000) {
+          console.log("Error: File is over 1MB")
           res.redirect('/profile')
         }
         else {
@@ -128,7 +135,11 @@ module.exports = function(app){
                 }, function(error, response) {
                   console.log('uploaded file[' + fileName + '] to [' + remoteFilename + '] as [' + metaData + ']');
                   console.log(arguments);
+                  pet.save(function(err, pet) {})
+                user.save(function(err, user) {})
+                res.redirect('/profile')
                 });
+
               }
 
 
@@ -145,10 +156,6 @@ module.exports = function(app){
 
                 return rc;
               }
-
-              pet.save(function(err, pet) {})
-              user.save(function(err, user) {})
-              res.render('/profile')
 
             }
           }

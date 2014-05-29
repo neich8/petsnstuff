@@ -1,13 +1,16 @@
 <% include _html_header.ejs %>
   <% include _nav.ejs %>
+  <script src="/scripts/cat.js"></script>
   <div id="wrapper">
     <div id="content">
+
+    <div class="photo"></div>
       <%if(req.user) { %>
   	<form action="/post" method="post">
   		 Title:
       <br><input type="string" name="title"  placeholder="Title"> <br><br>
       Message:<br>
-             <div class="photo"></div>
+             
       <textarea rows="10" cols="30" name="content"></textarea>
       <br><br><input type="submit" name="Post!">
     </form>
@@ -15,21 +18,28 @@
         <h3><a href="/auth/facebook">Sign in<a> to post</h3>
       <% } %>
       <h1>Posts</h1>
-        <ul>
+      
+        <div style="display: inline"> 
         <% for(var i=0; i<messageboard.length; i++) {%>
 
-          <li><%= messageboard[i].title %></li>
-          <li><%= messageboard[i].post %></li>
-          <li><form action="/delete/<%= messageboard[i]._id %>" method="post">
+       <p id="test_header"><%= messageboard[i].title %></p>
+       
+
+          <!-- <li><%= messageboard[i].post %></li> -->
+          <form style="display: inline" action="/delete/<%= messageboard[i]._id %>" method="post">
           <% if (req.user) { %>
             <% if(req.user.fbId == messageboard[i].fbId) { %>
-            <button type="submit">Delete</button>
-            </form></li>
-            <li><a href="/edit/<%= messageboard[i]._id %>">Edit</a></li>
+            
+            <button id="button" type="submit">Delete</button>
+          
+            </form>
+            
+            <a id="button" href="/edit/<%= messageboard[i]._id %>">Edit</a>
+          </div>
             <% } %>
           <% } %>
         <% } %>
-      </ul>
+      </div>
     </div>
   </div>
 

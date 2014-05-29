@@ -60,4 +60,34 @@ $(function() {
     $("#tabs").append("<div id='tabs-" + tab_number + "'>" + pet.markings + "</div>")
     $("div#tabs").tabs("refresh")
   }
+
+  if ($("#active_tab").html() != "") {
+    $( "div#tabs").tabs( "option", "active", parseInt( $("#active_tab").html() ) );
+  }
+
+  $(".remove").click(function(){
+    var check = confirm("Really delete this pet profile?");
+    if (check != false) {
+      var id = $(this).attr("data-tab")
+      $.ajax({
+        url: "/delete",
+        method: "post",
+        data: {
+          petid: $(this).attr("data-pet"),
+        },
+        success: function(response) {
+          $( $("#tabs-" + id) ).remove().attr( "aria-controls" );
+          $( $("#tab_" + id + "_header") ).remove();
+          $("div#tabs").tabs("refresh")
+        }
+      });
+    }
+  })
 });
+
+
+// tabs.delegate( "span.ui-icon-close", "click", function() {
+//       var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+//       $( "#" + panelId ).remove();
+//       tabs.tabs( "refresh" );
+//     });

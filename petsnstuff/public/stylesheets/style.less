@@ -14,6 +14,7 @@ body {
   position: fixed;
   width: 100%;
   top: 0;
+  z-index:999;
 }
 
 #nav-wrapper {
@@ -77,10 +78,15 @@ body {
 
 #tabs {
   margin-top: 1em;
+  float: none;
+  z-index: 5;
 }
 
 #tabs li .ui-icon-close {
-  float: left; margin: 0.4em 0.2em 0 0; cursor: pointer;
+  float: left; 
+  margin: 0.4em 0.2em 0 0; 
+  cursor: pointer;
+
  }
 
 #add_tab {

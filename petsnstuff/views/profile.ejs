@@ -11,27 +11,26 @@
       <div id="dialog" title="Pet Information">
         <form id="pet_submission">
           <fieldset class="ui-helper-reset">
-            <span="tab_title">Name</span>
-            <input type="text" name="petName" id="petName" class="ui-widget-content ui-corner-all">
-            <span="tab_content">Age</span>
-            <input type="text" name="age" id="age" class="ui-widget-content ui-corner-all" size="4">
-            <span="tab_content">Approx. Weight</span>
-            <input type="text" name="weight" id="weight" class="ui-widget-content ui-corner-all" size="4">
-            <span="tab_title">License Number</span>
+            <span class="tab_title">Name<span class="validation" id="name_validation">  *Required</span></span>
+            <input type="text" data="required" name="petName" id="petName" class="ui-widget-content ui-corner-all">
+            <span class="tab_title">Age<span class="validation" id="age_validation">  *Required</span></span>
+            <input type="text" data="required" name="age" id="age" class="ui-widget-content ui-corner-all" size="4">
+            <span class="tab_title">Approx. Weight<span class="validation" id="weight_validation">  *Required</span></span>
+            <input type="text" data="required" name="weight" id="weight" class="ui-widget-content ui-corner-all" size="4">
+            <span class="tab_title">License Number</span>
             <input type="text" name="license" id="license" class="ui-widget-content ui-corner-all">
-            <span="tab_title">Breed</span>
-
-            <input type="text" name="type" id="breed" class="ui-widget-content ui-corner-all">
-            <span="tab_title">Color/Markings</span>
+            <span class="tab_title">Breed<span class="validation" id="breed_validation">  *Required</span></span>
+            <input type="text" data="required" name="type" id="breed" class="ui-widget-content ui-corner-all">
+            <span class="tab_title">Color/Markings</span>
             <input type="text" name="markings" id="markings" class="ui-widget-content ui-corner-all">
-            <span="tab_title">Immunizations:</span>
+            <span class="tab_title">Immunizations:</span>
             <input type="text" name="shotName" id="shotName" class="ui-widget-content ui-corner-all">
-            <span="tab_title">Date Administered:</span>
+            <span class="tab_title">Date Administered:</span>
             <input type="text" name="shotDate" id="shotDate" class="ui-widget-content ui-corner-all">
           </fieldset>
         </form>
       </div>
- 
+
         <h1><%= profile.userName %>'s Pets Page</h1>
         <div id="tabs">
           <ul>
@@ -67,9 +66,7 @@
                 </div>
                 </div>
               </div>
-              </div>
             <% } %>
-
     </div>
   </div>
 <% include _html_footer.ejs %>

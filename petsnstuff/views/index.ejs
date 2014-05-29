@@ -11,15 +11,20 @@
         <h1>Welcome to <%= title %></h1>
         <br/>
         <br/>
-        <div><h3>PLACEHOLDER CHART TITLE</div>
-        <div>
-Ingredients: Ground yellow corn; corn germ meal; meat and bone meal (source of pork flavor); soybean meal; beef tallow preserved with mixed-tocopherols (form of vitamin E); egg and chicken flavor; corn gluten meal; animal digest; salt; dried peas; potassium chloride; natural steak flavor; natural grill flavor; choline chloride; added color (red 40; yellow 5; blue 2); zinc sulfate; ferrous sulfate; dl-methionine; vitamin E supplement; manganese sulfate; niacin; vitamin A supplement; calcium carbonate; copper sulfate; calcium pantothenate; garlic oil; pyridoxine hydrochloride; vitamin B12 supplement; thiamine mononitrate; vitamin D3 supplement; riboflavin supplement; calcium iodate; menadione sodium bisulfite complex (source of vitamin K activity); folic acid; biotin; sodium selenite</div>
+        <br/>
         <br/>
         <br/>
         <div id="chart_container">
           <label>Guaranteed Analysis<input type="radio" class="radio_button" id="guaranteed_analysis" name="method" onclick="change_analysis(0)"/></label>
           <label>Dry Matter Basis<input type="radio" class="radio_button" id="dry_matter_basis" name="method" onclick="change_analysis(1)"/></label>
           <label>Calorie Weighted Basis<input type="radio" class="radio_button" id="calorie_weighted_basis" name="method" onclick="change_analysis(2)"/></label>
+          <br/>
+          <div>
+            <h3 id="analysis_type">Guarunteed Analysis</h3>
+          </div>
+          <div id="analysis_description">
+            Pet food industry standard of displaying minimal levels of crude protein and fat. No analysis is made for carbs, and the protein and fat are listed as crude, rather than digestible sources. The white parts of the chart represent all other raw materials, such as water/moisture weight. The guarunteed analysis can be used as a starting point in understanding the quality of a food, but the dry matter basis represents a better way of breaking down the protein and fat levels in your pet food.
+          </div>
           <br/>
           <% for (var i = 0; i <= 2; i ++ )  { %>
             <div class="hidden foods left_foods" id="food<%= i %>_left"><%= foods[i].Protein + "," + foods[i].Fat + "," + foods[i].Carbs %></div>
@@ -48,7 +53,7 @@ Ingredients: Ground yellow corn; corn germ meal; meat and bone meal (source of p
               <g id="rightGraph"></g>
           </svg>
               </div>
-   
+
           <p class="ingredients" id="ingredients_left"><%= ingredients[0].Ingredients %></p>
           <p class="ingredients" id="ingredients_right"><%= ingredients[0].Ingredients %></p>
         </div>

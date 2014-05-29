@@ -60,4 +60,6 @@ $(function() {
     $("#tabs").append("<div id='tabs-" + tab_number + "'>" + pet.markings + "</div>")
     $("div#tabs").tabs("refresh")
   }
+
+  $("#profile-image").css("max-height", 100)
 });

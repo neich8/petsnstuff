@@ -27,6 +27,7 @@ $(function() {
           },
           success: function(response) {
             addTab(response.pet);
+             window.location.href = '/profile';
           }
         });
         $( this ).dialog( "close" );
@@ -56,9 +57,11 @@ $(function() {
 
   function addTab(pet){
     var tab_number = $("#tabs ul").children().length + 1
-    $("#tabs ul").prepend("<li><a href='#tabs-" + tab_number + "'>" + pet.name + "</a></li>")
+    $("#tabs ul").prepend("<li><a href='#tabs-" + tab_number + "'>" + pet.name + "</a><span class='remove' data-pet='"+ pet.id +
+     "' data-tab='"+ tab_number +"'>x</span></li>")
     $("#tabs").append("<div id='tabs-" + tab_number + "'>" + pet.markings + "</div>")
     $("div#tabs").tabs("refresh")
+    $("#tabs ul").load("refresh")
   }
 
 

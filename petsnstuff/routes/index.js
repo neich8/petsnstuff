@@ -37,6 +37,7 @@ module.exports = function(app){
 
 
   app.get("/profile", function(req, res) {
+    console.log("Hello")
     if ( app.get("active") != undefined ) {
       var active_tab = app.get("active")
     }

@@ -95,3 +95,4 @@ $(function() {
 //       $( "#" + panelId ).remove();
 //       tabs.tabs( "refresh" );
 //     });
+
